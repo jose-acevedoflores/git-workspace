@@ -14,7 +14,8 @@ public class Tester {
 		
 		 //Comment after added repo
 		circuit10_28();
-		circuit10_29();
+		//comment in mac
+//		circuit10_29();
 		
 		
 	}
