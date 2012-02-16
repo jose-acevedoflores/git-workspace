@@ -12,8 +12,8 @@ public class Tester {
 		
 		test();
 		
-		//circuit10_28();
 		 
+		//circuit10_28();
 		//circuit10_29();
 		
 		
