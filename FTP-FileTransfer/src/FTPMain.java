@@ -42,6 +42,8 @@ public class FTPMain extends JFrame implements ActionListener{
 		this.setLocationRelativeTo(null);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
+		
+		//This sets the icon in linux during run-time
 		this.setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("FTP-512x512.png")));
 
 		JPanel all = new JPanel();
