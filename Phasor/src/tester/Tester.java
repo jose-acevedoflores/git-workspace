@@ -10,11 +10,10 @@ public class Tester {
 	 */
 	public static void main(String[] args) {
 		
-		//test();
+		test();
 		
-		circuit10_28();
-		
-		//comment in linux 
+		//circuit10_28();
+		 
 		//circuit10_29();
 		
 		
