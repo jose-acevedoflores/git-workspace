@@ -12,9 +12,10 @@ public class Tester {
 		
 		//test();
 		
-		//circuit10_28();
+		circuit10_28();
 		
-		circuit10_29();
+		//comment in linux 
+		//circuit10_29();
 		
 		
 	}
