@@ -10,7 +10,7 @@ public class NumberedSquare extends Rectangle{
 	
 	public NumberedSquare(int number)
 	{
-		super(30,30);
+		super(80,80);
 		this.number = number;
 	}
 	
