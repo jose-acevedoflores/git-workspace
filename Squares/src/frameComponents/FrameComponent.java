@@ -1,5 +1,6 @@
 package frameComponents;
 
+import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.util.Random;
@@ -18,7 +19,6 @@ public class FrameComponent extends JComponent{
 	public FrameComponent(int n)
 	{
 		this.n = n;
-
 		squares = new NumberedSquare[n][n];
 	}
 
@@ -46,6 +46,7 @@ public class FrameComponent extends JComponent{
 			randoms[first] = swapLast;
 
 		}
+		
 
 		int c = 0;
 		for(int i = 0 ; i < n; i++)
@@ -54,8 +55,12 @@ public class FrameComponent extends JComponent{
 
 				squares[i][j] = new NumberedSquare(randoms[c]);
 				squares[i][j].translate( 40 + 80*j, 40 + 80*i );
+				
+				g2.setPaint(new Color(224,224,224));
+				g2.fill(squares[i][j]);
+				g2.setPaint(Color.BLACK);
 				g2.draw(squares[i][j]);
-
+				
 				g2.drawString(String.valueOf(squares[i][j].getNumber()), (int) squares[i][j].getX()+40, (int) squares[i][j].getY()+40 );
 				c++;
 			}
