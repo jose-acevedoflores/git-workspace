@@ -11,9 +11,11 @@ public class IP extends Activity implements OnClickListener{
 
 	private Button bShowIP;
 	private TextView tvIP;
+	private Button bResetIP;
 
 	protected void onCreate(Bundle savedInstanceState)
 	{
+		super.onCreate(savedInstanceState);
 		init();
 	}
 
@@ -22,7 +24,10 @@ public class IP extends Activity implements OnClickListener{
 	private void init()
 	{
 		this.bShowIP = (Button) findViewById(R.id.bShowIP);
+		this.bResetIP = (Button) findViewById(R.id.bResetIP);
 		this.tvIP = (TextView) findViewById(R.id.tvDisplayIP); 	
+		this.bShowIP.setOnClickListener(this);
+		this.bResetIP.setOnClickListener(this);
 	}
 
 	public void onPause()
