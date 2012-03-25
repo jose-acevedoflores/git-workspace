@@ -60,7 +60,13 @@ public class IP extends Activity implements OnClickListener{
 		{
 		case R.id.bShowIP:
 			int ip = wifiManager.getConnectionInfo().getIpAddress();
-			tvIP.setText("IP: "+ip);
+			String ipS = String.format("%d.%d.%d.%d",
+					(ip & 0xff),
+					(ip >> 8 & 0xff),
+					(ip >> 16 & 0xff),
+					(ip >> 24 & 0xff));
+			
+			tvIP.setText("IP: "+ipS);
 			break;
 			
 		case R.id.bShowSSSID_IP:
