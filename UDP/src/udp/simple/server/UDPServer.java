@@ -16,6 +16,8 @@ public class UDPServer {
 		byte[] sendData = new byte[1024];
 		while(true)
 		{
+			receiveData = new byte[1024];
+			sendData = new byte[1024];
 			DatagramPacket receivePacket = new DatagramPacket(receiveData, receiveData.length);
 			serverSocket.receive(receivePacket);
 			String sentence = new String( receivePacket.getData());
