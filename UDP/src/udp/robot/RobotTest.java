@@ -26,8 +26,6 @@ public class RobotTest {
 	}
 	
 	private class MouseMover implements ActionListener{
-
-		//private Robot rb;
 		
 		@Override
 		public void actionPerformed(ActionEvent e) {
@@ -56,7 +54,7 @@ public class RobotTest {
 		String inp = "y";
 		RobotTest rt = new RobotTest();
 	
-		Timer ti = new Timer(500, rt.getMouseMover());
+		Timer ti = new Timer(20, rt.getMouseMover());
 		ti.start();
 		while(!inp.equalsIgnoreCase("End"))
 		{
