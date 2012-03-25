@@ -16,6 +16,7 @@ public class IP extends Activity implements OnClickListener{
 	protected void onCreate(Bundle savedInstanceState)
 	{
 		super.onCreate(savedInstanceState);
+		this.setContentView(R.layout.ip);
 		init();
 	}
 
@@ -25,7 +26,9 @@ public class IP extends Activity implements OnClickListener{
 	{
 		this.bShowIP = (Button) findViewById(R.id.bShowIP);
 		this.bResetIP = (Button) findViewById(R.id.bResetIP);
-		this.tvIP = (TextView) findViewById(R.id.tvDisplayIP); 	
+
+		this.tvIP = (TextView) findViewById(R.id.tvDisplayIP);
+
 		this.bShowIP.setOnClickListener(this);
 		this.bResetIP.setOnClickListener(this);
 	}
@@ -43,11 +46,11 @@ public class IP extends Activity implements OnClickListener{
 		switch (v.getId())
 		{
 		case R.id.bShowIP:
-			if(tvIP.getText().equals("IP: "))
-				tvIP.setText("IP: LALALA");
+			tvIP.setText("IP: LALALA");
+			break;
 			
-			else
-				tvIP.setText("IP: ");
+		case R.id.bResetIP:
+			tvIP.setText("IP: ");
 			break;
 		}
 
