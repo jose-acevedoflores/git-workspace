@@ -21,5 +21,13 @@
         android:layout_marginTop="20dp"
         android:text="Show IP"
         android:textSize="20dp" />
+       <Button
+        android:id="@+id/bResetIP"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="20dp"
+        android:text="Reset IP field"
+        android:textSize="20dp" />
 
 </LinearLayout>
