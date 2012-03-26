@@ -14,7 +14,7 @@ public class Test {
 	public static void main(String[] args) throws UnknownHostException, SocketException {
 
 
-		InetAddress w = InetAddress.getByName("jose-System.lan");
+		InetAddress w = InetAddress.getByName("jose-System");
 		InetAddress p = InetAddress.getLocalHost();
 
 		System.out.println("P - test\n");
@@ -29,19 +29,19 @@ public class Test {
 		System.out.println("Is Loopback address? "+ w.isLoopbackAddress());
 		System.out.println("HostName "+ w.getHostName());
 
-//		Enumeration<NetworkInterface> nets =  NetworkInterface.getNetworkInterfaces();
-//
-//		for (NetworkInterface netint : Collections.list(nets)) {
-//			System.out.println("\nInterface Name : " + netint.getDisplayName());
-//
-//			Enumeration<InetAddress> inetAddresses = netint.getInetAddresses();
-//
-//			for (InetAddress inetAddress : Collections.list(inetAddresses)) {
-//
-//				System.out.println("Local host Name\t: " + inetAddress.getHostName());
-//				System.out.println("Host Address\t: " + inetAddress.getHostAddress()); 
-//			}
-//		}
+		Enumeration<NetworkInterface> nets =  NetworkInterface.getNetworkInterfaces();
+
+		for (NetworkInterface netint : Collections.list(nets)) {
+			System.out.println("\nInterface Name : " + netint.getDisplayName());
+
+			Enumeration<InetAddress> inetAddresses = netint.getInetAddresses();
+
+			for (InetAddress inetAddress : Collections.list(inetAddresses)) {
+
+				System.out.println("Local host Name\t: " + inetAddress.getHostName());
+				System.out.println("Host Address\t: " + inetAddress.getHostAddress()); 
+			}
+		}
 
 
 	}
