@@ -5,6 +5,8 @@ import java.lang.reflect.Method;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
 
+import udp.server.UDPClient;
+
 import android.app.Activity;
 import android.content.Context;
 //import android.net.ConnectivityManager;
@@ -55,6 +57,8 @@ public class IP extends Activity implements OnClickListener{
 		this.etIPField = (EditText) findViewById(R.id.etIPfield);
 		this.bSend = (Button) findViewById(R.id.bSendIP);
 		this.tvFromServer = (TextView) findViewById(R.id.tvFromServerIP);
+		
+		this.bSend.setOnClickListener(this);
 		
 		
 		this.bShowIP = (Button) findViewById(R.id.bShowIP);
@@ -167,6 +171,19 @@ public class IP extends Activity implements OnClickListener{
 			break;
 		case R.id.bResetIP:
 			tvIP.setText("INFO: ");
+			break;
+			
+		case R.id.bSendIP:
+			String message = this.etMessage.getText().toString();
+			String ipString = this.etIPField.getText().toString();
+			try {
+				this.tvFromServer.setText("Waiting for server: ");
+				UDPClient client = new UDPClient(ipString, message, tvFromServer);
+			} catch (Exception e) {
+				// Exploto
+				this.tvFromServer.setText("Exploto");
+				e.printStackTrace();
+			}
 			break;
 		}
 
