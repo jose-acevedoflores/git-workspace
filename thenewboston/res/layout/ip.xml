@@ -29,8 +29,8 @@
                 <LinearLayout
                     android:id="@+id/tab1IP"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent" 
-                    android:orientation="vertical">
+                    android:layout_height="match_parent"
+                    android:orientation="vertical" >
 
                     <TextView
                         android:id="@+id/tvDisplayIP"
@@ -81,13 +81,38 @@
                 <LinearLayout
                     android:id="@+id/tab2IP"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent" >
+                    android:layout_height="match_parent"
+                    android:orientation="vertical" >
 
                     <EditText
                         android:id="@+id/etIP"
-                        android:layout_width="100dp"
+                        android:layout_width="300dp"
                         android:layout_height="50dp"
-                        android:hint="Wiii" />
+                        android:layout_gravity="center"
+                        android:hint="Message" />
+
+                    <EditText
+                        android:id="@+id/etIPfield"
+                        android:layout_width="300dp"
+                        android:layout_height="50dp"
+                        android:layout_gravity="center"
+                        android:hint="IP" />
+
+                    <Button
+                        android:id="@+id/bSendIP"
+                        android:layout_width="250dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginTop="20dp"
+                        android:text="Send to server"
+                        android:textSize="20dp" />
+
+                    <TextView
+                        android:id="@+id/tvFromServerIP"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                    	android:layout_gravity="center"
+                        android:text="From Server: " />
                 </LinearLayout>
             </FrameLayout>
         </LinearLayout>

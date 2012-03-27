@@ -32,7 +32,11 @@ public class IP extends Activity implements OnClickListener{
 	private WifiConfiguration apconf;
 	private TabHost host;
 	private TabSpec spec;
-	private EditText et;
+	
+	private EditText etMessage;
+	private EditText etIPField;
+	private Button bSend;
+	private TextView tvFromServer;
 
 
 	protected void onCreate(Bundle savedInstanceState)
@@ -47,7 +51,11 @@ public class IP extends Activity implements OnClickListener{
 	private void init()
 	{
 		this.host = (TabHost) findViewById(R.id.tabhostIP);
-		this.et = (EditText) findViewById(R.id.etIP);
+		this.etMessage = (EditText) findViewById(R.id.etIP);
+		this.etIPField = (EditText) findViewById(R.id.etIPfield);
+		this.bSend = (Button) findViewById(R.id.bSendIP);
+		this.tvFromServer = (TextView) findViewById(R.id.tvFromServerIP);
+		
 		
 		this.bShowIP = (Button) findViewById(R.id.bShowIP);
 		this.bResetIP = (Button) findViewById(R.id.bResetIP);
