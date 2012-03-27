@@ -23,6 +23,7 @@ public class UDPServer {
 			String sentence = new String( receivePacket.getData());
 			System.out.println("RECEIVED: " + sentence);
 			InetAddress IPAddress = receivePacket.getAddress();
+			//System.out.println("IP from Client is: "+IPAddress);
 			int port = receivePacket.getPort();
 			String capitalizedSentence = sentence.toUpperCase();
 			sendData = capitalizedSentence.getBytes();
