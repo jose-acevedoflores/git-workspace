@@ -15,6 +15,9 @@ import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.TabHost;
+import android.widget.TabHost.TabSpec;
 import android.widget.TextView;
 
 public class IP extends Activity implements OnClickListener{
@@ -27,6 +30,9 @@ public class IP extends Activity implements OnClickListener{
 	private WifiManager wifiManager;
 	private InetAddress addr;
 	private WifiConfiguration apconf;
+	private TabHost host;
+	private TabSpec spec;
+	private EditText et;
 
 
 	protected void onCreate(Bundle savedInstanceState)
@@ -40,6 +46,9 @@ public class IP extends Activity implements OnClickListener{
 
 	private void init()
 	{
+		this.host = (TabHost) findViewById(R.id.tabhostIP);
+		this.et = (EditText) findViewById(R.id.etIP);
+		
 		this.bShowIP = (Button) findViewById(R.id.bShowIP);
 		this.bResetIP = (Button) findViewById(R.id.bResetIP);
 		this.bShowSSID = (Button) findViewById(R.id.bShowSSSID_IP);
@@ -51,6 +60,19 @@ public class IP extends Activity implements OnClickListener{
 		this.bResetIP.setOnClickListener(this);
 		this.bShowSSID.setOnClickListener(this);
 		this.bExtra.setOnClickListener(this);
+		
+		this.host.setup();
+		
+		this.spec = this.host.newTabSpec("tab1IP");
+		this.spec.setContent(R.id.tab1IP);
+		this.spec.setIndicator("Show IP");
+		this.host.addTab(spec);
+		
+		this.spec = this.host.newTabSpec("tab2IP");
+		this.spec.setContent(R.id.tab2IP);
+		this.spec.setIndicator("UDP");
+		this.host.addTab(spec);
+		
 
 		//wfm = this.getBaseContext().getSystemService(Context.WIFI_SERVICE);
 
