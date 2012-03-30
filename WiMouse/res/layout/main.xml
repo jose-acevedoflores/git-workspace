@@ -26,8 +26,6 @@
             android:layout_height="wrap_content"
             android:hint="@string/etNewIP"
             android:inputType="number" >
-
-            <requestFocus />
         </EditText>
 
         <EditText
