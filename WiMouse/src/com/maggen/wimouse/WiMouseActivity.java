@@ -10,4 +10,11 @@ public class WiMouseActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
     }
+    
+    public void onPause()
+    {
+    	super.onPause();
+    	this.finish();
+    }
+    
 }
