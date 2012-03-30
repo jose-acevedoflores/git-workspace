@@ -15,14 +15,19 @@ import android.view.Window;
 
 public class MouseArea extends Activity implements OnTouchListener{
 
-
+	private Pad view;
+	
 	public void onCreate(Bundle savedInstanceSate)
 	{
 		super.onCreate(savedInstanceSate);
+		
 		this.requestWindowFeature(Window.FEATURE_NO_TITLE);
 		getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
 		
-		this.setContentView(new Pad(this));
+		view  = new Pad(this);
+		view.setOnTouchListener(this);
+		this.setContentView(view);
+		
 	}
 
 	public void onPause()
@@ -33,8 +38,12 @@ public class MouseArea extends Activity implements OnTouchListener{
 
 	@Override
 	public boolean onTouch(View v, MotionEvent event) {
-		// TODO Auto-generated method stub
-		return false;
+		
+		float x = event.getX();
+		float y = event.getY();
+		
+		
+		return true;
 	}
 	
 	
