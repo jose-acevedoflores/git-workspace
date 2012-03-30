@@ -2,6 +2,8 @@ package com.maggen.wimouse;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.view.View;
+import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
@@ -27,6 +29,7 @@ public class WiMouseActivity extends Activity {
     {
     	//Initialize the button
     	this.startButton = (Button) findViewById(R.id.bStart);
+    	this.startButton.setOnClickListener(new ButtonListener());
     	
     	//Initialize the list view
     	this.previousIPs = (ListView) findViewById(R.id.lvPreviousIP);
@@ -47,4 +50,13 @@ public class WiMouseActivity extends Activity {
     	this.finish();
     }
     
+    
+    private class ButtonListener implements OnClickListener{
+
+		@Override
+		public void onClick(View v) {
+			
+		}
+    	
+    }
 }
