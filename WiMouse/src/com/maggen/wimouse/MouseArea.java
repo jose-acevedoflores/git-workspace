@@ -11,4 +11,10 @@ public class MouseArea extends Activity{
 		this.setContentView(R.layout.mousearea);
 	}
 	
+	public void onPause()
+	{
+		super.onPause();
+		this.finish();
+	}
+	
 }

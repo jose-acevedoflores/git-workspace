@@ -1,6 +1,7 @@
 package com.maggen.wimouse;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -47,7 +48,6 @@ public class WiMouseActivity extends Activity {
     public void onPause()
     {
     	super.onPause();
-    	this.finish();
     }
     
     
@@ -55,7 +55,8 @@ public class WiMouseActivity extends Activity {
 
 		@Override
 		public void onClick(View v) {
-			
+			Intent i = new Intent("android.intent.action.MOUSEAREA");
+			startActivity(i);
 		}
     	
     }

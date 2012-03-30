@@ -11,7 +11,8 @@
         android:gravity="center"
         android:paddingBottom="20dp"
         android:paddingTop="25dp"
-        android:text="@string/menu" />
+        android:text="@string/menu"
+        android:textSize="20dp" />
 
     <LinearLayout
         android:layout_width="fill_parent"
