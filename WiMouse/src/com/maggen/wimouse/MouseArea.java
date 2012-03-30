@@ -6,16 +6,22 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.os.Bundle;
-import android.util.Log;
+import android.view.MotionEvent;
 import android.view.SurfaceView;
+import android.view.View;
+import android.view.WindowManager;
+import android.view.View.OnTouchListener;
+import android.view.Window;
 
-public class MouseArea extends Activity{
+public class MouseArea extends Activity implements OnTouchListener{
 
 
 	public void onCreate(Bundle savedInstanceSate)
 	{
 		super.onCreate(savedInstanceSate);
-
+		this.requestWindowFeature(Window.FEATURE_NO_TITLE);
+		getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
+		
 		this.setContentView(new Pad(this));
 	}
 
@@ -25,7 +31,15 @@ public class MouseArea extends Activity{
 		this.finish();
 	}
 
-
+	@Override
+	public boolean onTouch(View v, MotionEvent event) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+	
+	
+	/*-------------------------Private class -------------------------------------*/
+	
 	private class Pad extends SurfaceView {
 
 		public Pad(Context context)
@@ -40,25 +54,25 @@ public class MouseArea extends Activity{
 			p.setColor(Color.RED);
 			float width = c.getWidth();
 			float height = c.getHeight();
-			Log.d("D", "W "+width);
 			
-			double dummy = height - height/2.6;
+			//Change the value for the top of the rectangle.
+			double dummy = height - height/4.2;
 			float top=Float.parseFloat(String.valueOf(dummy));
 			
+			//Change the value for the right side of the rectangle
 			dummy = width/2.4;
 			float right = Float.parseFloat(String.valueOf(dummy));
 			
 			c.drawRect(0, top , right, height, p);
 			
+			//Change the value for the left side of the rectangle.
 			dummy = width - width/2.4; 
 			float left = Float.parseFloat(String.valueOf(dummy));
 			
 			c.drawRect(left , top , width, height, p);
 			
 		}
-		
-
-
 	}
+	/*-------------------------Private class -------------------------------------*/
 
 }
