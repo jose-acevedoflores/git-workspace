@@ -53,8 +53,14 @@
             android:inputType="number" >
         </EditText>
     </LinearLayout>
-    
-    <ListView ></ListView>
+
+    <ListView
+        android:id="@+id/lvPreviousIP"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:entries="@array/previousIP" >
+    </ListView>
 
     <Button
         android:id="@+id/button1"

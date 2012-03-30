@@ -2,6 +2,6 @@
 <resources>
     
     <string-array name="previousIP">
-        <item></item>
+        <item>None</item>
     </string-array>
 </resources>
