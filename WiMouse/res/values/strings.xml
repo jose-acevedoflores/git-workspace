@@ -4,5 +4,6 @@
     <string name="menu">Select or type the IP from the server</string>
     <string name="app_name">WiMouse</string>
     <string name="etNewIP">IP</string>
+    <string name="buttonText">Start</string>
 
 </resources>

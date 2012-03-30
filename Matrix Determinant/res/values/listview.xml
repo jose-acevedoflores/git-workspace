@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="entries">
+        <item >Matrix 2x2</item>
+        <item > Matrix 3x3</item>
+        
+    </string-array>
+
+    
+</resources>

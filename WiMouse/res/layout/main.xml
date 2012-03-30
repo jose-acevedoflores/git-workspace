@@ -53,5 +53,15 @@
             android:inputType="number" >
         </EditText>
     </LinearLayout>
+    
+    
+
+    <Button
+        android:id="@+id/button1"
+        android:layout_width="90dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="30dp"
+        android:text="@string/buttonText" />
 
 </LinearLayout>
