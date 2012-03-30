@@ -54,7 +54,7 @@
         </EditText>
     </LinearLayout>
     
-    
+    <ListView ></ListView>
 
     <Button
         android:id="@+id/button1"
