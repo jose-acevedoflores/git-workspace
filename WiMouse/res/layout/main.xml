@@ -13,6 +13,45 @@
         android:paddingTop="25dp"
         android:text="@string/menu" />
 
-    
-    
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="horizontal" >
+
+        <EditText
+            android:id="@+id/etIP1"
+            android:layout_width="70dp"
+            android:layout_height="wrap_content"
+            android:hint="@string/etNewIP"
+            android:inputType="number" >
+
+            <requestFocus />
+        </EditText>
+
+        <EditText
+            android:id="@+id/etIP2"
+            android:layout_width="70dp"
+            android:layout_height="wrap_content"
+            android:hint="@string/etNewIP"
+            android:inputType="number" >
+        </EditText>
+
+        <EditText
+            android:id="@+id/etIP3"
+            android:layout_width="70dp"
+            android:layout_height="wrap_content"
+            android:hint="@string/etNewIP"
+            android:inputType="number" >
+        </EditText>
+
+        <EditText
+            android:id="@+id/etIP4"
+            android:layout_width="70dp"
+            android:layout_height="wrap_content"
+            android:hint="@string/etNewIP"
+            android:inputType="number" >
+        </EditText>
+    </LinearLayout>
+
 </LinearLayout>
