@@ -5,5 +5,6 @@
     <string name="app_name">WiMouse</string>
     <string name="etNewIP">IP</string>
     <string name="buttonText">Start</string>
+    <string name="about">This is my app xD</string>
 
 </resources>
