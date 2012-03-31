@@ -5,6 +5,8 @@ import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
@@ -58,10 +60,32 @@ public class WiMouseActivity extends Activity {
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 
-		
+		MenuInflater inflater = this.getMenuInflater();
+		inflater.inflate(R.menu.menu, menu);
 		
 		return true;
 	}
+	
+    public boolean onOptionsItemSelected(MenuItem item) 
+    {
+    	switch (item.getItemId()) {
+		case R.id.about:
+		
+			break;
+
+		case R.id.settings:
+			
+			break;
+			
+		case R.id.exit:
+			this.finish();
+			break;
+			
+		default:
+			break;
+		}
+    	return true;
+    }
 
 	/*-------------------------Private class -------------------------------------*/
 
