@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
@@ -53,6 +54,16 @@ public class WiMouseActivity extends Activity {
 	{
 		super.onPause();
 	}
+		 
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+
+		
+		
+		return true;
+	}
+
+	/*-------------------------Private class -------------------------------------*/
 
 
 	private class ButtonListener implements OnClickListener{
@@ -105,4 +116,6 @@ public class WiMouseActivity extends Activity {
 		}
 
 	}
+	/*-------------------------Private class -------------------------------------*/
+
 }
