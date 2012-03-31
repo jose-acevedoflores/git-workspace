@@ -1,5 +1,7 @@
 package com.maggen.wimouse;
 
+import com.maggen.udp.client.UDPClient;
+
 import android.app.Activity;
 import android.content.Context;
 import android.graphics.Canvas;
@@ -12,10 +14,13 @@ import android.view.View;
 import android.view.WindowManager;
 import android.view.View.OnTouchListener;
 import android.view.Window;
+import android.widget.EditText;
 
 public class MouseArea extends Activity implements OnTouchListener{
 
 	private Pad view;
+	private EditText[] ipFields;
+	private UDPClient client;
 	
 	public void onCreate(Bundle savedInstanceSate)
 	{
@@ -28,6 +33,21 @@ public class MouseArea extends Activity implements OnTouchListener{
 		view.setOnTouchListener(this);
 		this.setContentView(view);
 		
+		//Initialize the four ip fields.
+    	this.ipFields = new EditText[4];
+    	this.ipFields[0] = (EditText) findViewById(R.id.etIP1);
+    	this.ipFields[1] = (EditText) findViewById(R.id.etIP2);
+    	this.ipFields[2] = (EditText) findViewById(R.id.etIP3);
+    	this.ipFields[3] = (EditText) findViewById(R.id.etIP4);
+		
+    	String ip="";
+    	for(int i =0 ; i < 4 ; i++)
+    	{
+    		ip += ipFields[i].getText().toString()+".";
+    	}
+    	
+    	//We pass a substring from 0 to length -1 to eliminate the extra . at the end.
+    	client = new UDPClient(ip.substring(0, ip.length()-1));
 	}
 
 	public void onPause()
@@ -42,6 +62,7 @@ public class MouseArea extends Activity implements OnTouchListener{
 		float x = event.getX();
 		float y = event.getY();
 		
+		client.updatePointer(x, y);
 		
 		return true;
 	}

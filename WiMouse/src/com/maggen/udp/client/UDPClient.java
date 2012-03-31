@@ -31,7 +31,7 @@ public class UDPClient {
 		
 	}
 	
-	public void updatePointer(int x , int y)
+	public void updatePointer(float x , float y)
 	{
 		byte[] data = new byte[1024];
 		String str = x+","+y;
