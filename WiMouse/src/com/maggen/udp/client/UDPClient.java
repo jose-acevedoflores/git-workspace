@@ -11,47 +11,34 @@ import android.util.Log;
 
 public class UDPClient {
 
-	
+
 	DatagramSocket socket;
 	private InetAddress address;
 	private int port;
 
-	public UDPClient(String ip)
+	public UDPClient(String ip) throws SocketException, UnknownHostException
 	{
 		//default port
 		port = 9876;
-		try {
-			socket = new DatagramSocket();
-			address = InetAddress.getByName(ip);
-			Log.d("UDP", "creation");
-		}
-		catch (UnknownHostException e) {
-			Log.d("UDP", "host exception");
 
-			e.printStackTrace();
-		} catch (SocketException e) {
-			
-			e.printStackTrace();
-		}
+		socket = new DatagramSocket();
+		address = InetAddress.getByName(ip);
+		Log.d("UDP", "creation");
+
 
 	}
 
-	public void updatePointer(float x , float y)
+	public void updatePointer(float x , float y) throws IOException
 	{
 		byte[] data = new byte[1024];
 		String str = x+","+y;
 
 		data = str.getBytes();
 
-		
 		DatagramPacket packet = new DatagramPacket(data, data.length, address, port);
-		
-		try {
-			socket.send(packet);
-		} catch (IOException e) {
-			Log.d("UDP", "Exception in send packet");
-			e.printStackTrace();
-		}
+
+		socket.send(packet);
+
 	}
 
 
