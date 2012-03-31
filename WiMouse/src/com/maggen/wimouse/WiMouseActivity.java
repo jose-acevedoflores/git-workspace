@@ -61,8 +61,38 @@ public class WiMouseActivity extends Activity {
 			
 			ip = ip.substring(0,ip.length()-1);
 			
-			Intent i = new Intent("android.intent.action.MOUSEAREA");
-			startActivity(i);
+			if(this.checkValidIP())
+			{
+				Intent i = new Intent("android.intent.action.MOUSEAREA");
+				startActivity(i);
+			}
+			else
+			{
+				
+			}
+		}
+		
+		private boolean checkValidIP()
+		{
+			String ipA[] = ip.split(".");
+			if(ipA.length != 4)
+				return false;
+			
+			int n;
+			for(int i = 0 ; i < 4; i++)
+			{
+				try{
+					n = Integer.parseInt(ipA[i]);
+					
+					if(n > 255)
+						return false;
+				}
+				catch (NumberFormatException e) {
+					return false;
+				}
+			}
+			
+			return true;
 		}
     	
     }
