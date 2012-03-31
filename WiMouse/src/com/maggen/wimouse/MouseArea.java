@@ -31,16 +31,8 @@ public class MouseArea extends Activity implements OnTouchListener{
 		view  = new Pad(this);
 		view.setOnTouchListener(this);
 		this.setContentView(view);
-		
-		
-		
-    	Log.d("creation", "here");
-    	
-    	String ip="10.0.0.93";
-    	
-    	Log.d("creation", "after ip");
 
-    	client = new UDPClient(ip);
+    	client = new UDPClient(WiMouseActivity.ip);
 	}
 
 	public void onPause()

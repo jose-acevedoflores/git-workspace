@@ -9,6 +9,7 @@ public class WiMouseServer {
 
 		UDPServer server = new UDPServer();
 		
+		System.out.println("Server Running");
 		while(true)
 		{
 			System.out.println(server.start());

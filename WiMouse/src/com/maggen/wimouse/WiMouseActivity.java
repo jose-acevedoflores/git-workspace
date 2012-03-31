@@ -14,6 +14,7 @@ public class WiMouseActivity extends Activity {
 	private Button startButton;
 	private EditText[] ipFields;
 	private ListView previousIPs;
+	public static String ip ="";
 	
     /** Called when the activity is first created. */
     @Override
@@ -42,7 +43,6 @@ public class WiMouseActivity extends Activity {
     	this.ipFields[2] = (EditText) findViewById(R.id.etIP3);
     	this.ipFields[3] = (EditText) findViewById(R.id.etIP4);
 
-
     }
     
     public void onPause()
@@ -55,6 +55,12 @@ public class WiMouseActivity extends Activity {
 
 		@Override
 		public void onClick(View v) {
+			
+			for(int i = 0 ; i < ipFields.length; i++)
+				ip += ipFields[i].getText().toString()+".";
+			
+			ip = ip.substring(0,ip.length()-1);
+			
 			Intent i = new Intent("android.intent.action.MOUSEAREA");
 			startActivity(i);
 		}
