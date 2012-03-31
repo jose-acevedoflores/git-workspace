@@ -8,18 +8,17 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.SurfaceView;
 import android.view.View;
 import android.view.WindowManager;
 import android.view.View.OnTouchListener;
 import android.view.Window;
-import android.widget.EditText;
 
 public class MouseArea extends Activity implements OnTouchListener{
 
 	private Pad view;
-	private EditText[] ipFields;
 	private UDPClient client;
 	
 	public void onCreate(Bundle savedInstanceSate)
@@ -33,21 +32,15 @@ public class MouseArea extends Activity implements OnTouchListener{
 		view.setOnTouchListener(this);
 		this.setContentView(view);
 		
-		//Initialize the four ip fields.
-    	this.ipFields = new EditText[4];
-    	this.ipFields[0] = (EditText) findViewById(R.id.etIP1);
-    	this.ipFields[1] = (EditText) findViewById(R.id.etIP2);
-    	this.ipFields[2] = (EditText) findViewById(R.id.etIP3);
-    	this.ipFields[3] = (EditText) findViewById(R.id.etIP4);
 		
-    	String ip="";
-    	for(int i =0 ; i < 4 ; i++)
-    	{
-    		ip += ipFields[i].getText().toString()+".";
-    	}
+		
+    	Log.d("creation", "here");
     	
-    	//We pass a substring from 0 to length -1 to eliminate the extra . at the end.
-    	client = new UDPClient(ip.substring(0, ip.length()-1));
+    	String ip="10.0.0.93";
+    	
+    	Log.d("creation", "after ip");
+
+    	client = new UDPClient(ip);
 	}
 
 	public void onPause()
@@ -61,6 +54,8 @@ public class MouseArea extends Activity implements OnTouchListener{
 		
 		float x = event.getX();
 		float y = event.getY();
+		
+		Log.d("update", "x "+x+" y "+y);
 		
 		client.updatePointer(x, y);
 		

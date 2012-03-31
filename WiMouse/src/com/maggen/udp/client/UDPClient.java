@@ -7,6 +7,8 @@ import java.net.InetAddress;
 import java.net.SocketException;
 import java.net.UnknownHostException;
 
+import android.util.Log;
+
 public class UDPClient {
 
 	private DatagramSocket socket;
@@ -20,14 +22,16 @@ public class UDPClient {
 		try {
 			socket = new DatagramSocket();
 			address = InetAddress.getByName(ip);
+			Log.d("UDP", "creation");
 		} catch (SocketException e) {
-			
+			Log.d("UDP", "socket ex");
+	
 			e.printStackTrace();
 		} catch (UnknownHostException e) {
-			
+			Log.d("UDP", "host ex");
+
 			e.printStackTrace();
 		}
-		
 		
 	}
 	
@@ -38,6 +42,8 @@ public class UDPClient {
 		
 		data = str.getBytes();
 		
+		Log.d("UDP", "before packet");
+
 		DatagramPacket packet = new DatagramPacket(data, data.length, address, port);
 		
 		try {
