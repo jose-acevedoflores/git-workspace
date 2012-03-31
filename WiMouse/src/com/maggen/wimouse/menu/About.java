@@ -11,7 +11,7 @@ public class About extends Activity{
 	public void onCreate(Bundle sis)
 	{
 		super.onCreate(sis);
-		this.setContentView(R.id.about);
+		this.setContentView(R.layout.about);
 	}
 	
 }

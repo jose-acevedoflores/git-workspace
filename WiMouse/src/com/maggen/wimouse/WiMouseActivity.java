@@ -70,7 +70,8 @@ public class WiMouseActivity extends Activity {
     {
     	switch (item.getItemId()) {
 		case R.id.about:
-		
+			Intent i = new Intent("com.maggen.wimouse.menu.ABOUT");
+			startActivity(i);
 			break;
 
 		case R.id.settings:
