@@ -22,8 +22,8 @@ public class WiMouseServer {
 		String movement="";
 		while(true)
 		{
-			System.out.println("Updating");
 			movement = server.receive();
+		//	System.out.println("Time: ");
 			mover.updatePointer(movement);
 		}
 

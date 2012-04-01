@@ -30,6 +30,8 @@ public class MouseArea extends Activity implements OnTouchListener{
 	private float previousX;
 	private float previousY;
 	private int moveBuffer;
+	private long startTime;
+	private long endTime;
 	//	private AlertDialog.Builder dia;
 
 	public void onCreate(Bundle savedInstanceSate)
@@ -92,11 +94,15 @@ public class MouseArea extends Activity implements OnTouchListener{
 		case MotionEvent.ACTION_DOWN:
 			this.startX = x;
 			this.startY = y;
+			this.startTime = System.currentTimeMillis();
 			break;
 		case MotionEvent.ACTION_UP:
 			this.startX = 0;
 			this.startY = 0;
+			this.startTime = 0;
 			break;
+		default:
+			this.endTime = System.currentTimeMillis();
 		}
 
 
@@ -109,27 +115,27 @@ public class MouseArea extends Activity implements OnTouchListener{
 			else if(this.previousX + this.moveBuffer > x && this.previousX -this.moveBuffer < x)
 			{
 				if( y-this.startY < 0)
-					client.updatePointer(0,-1);
+					client.updatePointer(0,-1 , this.endTime - this.startTime);
 				else
-					client.updatePointer(0, 1);					
+					client.updatePointer(0, 1, this.endTime - this.startTime);					
 			}
 			else if(this.previousY + this.moveBuffer > y && this.previousY-this.moveBuffer < y)
 			{
 				if( x-this.startX < 0)
-					client.updatePointer(-1,0);
+					client.updatePointer(-1,0, this.endTime - this.startTime);
 				else
-					client.updatePointer(1, 0);	
+					client.updatePointer(1, 0, this.endTime - this.startTime);	
 			}
 			else{
 				
 				if( x-this.startX < 0 && y-this.startY < 0)
-					client.updatePointer(-1,-1);
+					client.updatePointer(-1,-1, this.endTime - this.startTime);
 				else if (x-this.startX > 0 && y-this.startY > 0)
-					client.updatePointer(1, 1);	
+					client.updatePointer(1, 1, this.endTime - this.startTime);	
 				else if (x-this.startX < 0 && y-this.startY > 0)
-					client.updatePointer(-1, 1);
+					client.updatePointer(-1, 1, this.endTime - this.startTime);
 				else if (x-this.startX > 0 && y-this.startY < 0)
-					client.updatePointer(1, -1);	
+					client.updatePointer(1, -1, this.endTime - this.startTime);	
 			}
 			
 			this.previousX = x;
