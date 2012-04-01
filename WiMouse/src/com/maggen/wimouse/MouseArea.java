@@ -27,7 +27,10 @@ public class MouseArea extends Activity implements OnTouchListener{
 	private UDPClient client;
 	private float startX;
 	private float startY;
-//	private AlertDialog.Builder dia;
+	private float previousX;
+	private float previousY;
+	private int moveBuffer;
+	//	private AlertDialog.Builder dia;
 
 	public void onCreate(Bundle savedInstanceSate)
 	{
@@ -41,30 +44,33 @@ public class MouseArea extends Activity implements OnTouchListener{
 		view.setOnTouchListener(this);
 		this.setContentView(view);
 
-		//initializing the start cooedinates of the touche event
+		//initializing the start coordinates of the touch event
 		this.startX = 0;
 		this.startY=0;
-		
+		this.previousX = 0; 
+		this.previousY= 0;
+		this.moveBuffer =2;
+
 		//Initialize alert dialog 
-//		dia = new AlertDialog.Builder(this);
+		//		dia = new AlertDialog.Builder(this);
 
 		try{
 			SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(this.getBaseContext());
 			client = new UDPClient(WiMouseActivity.ip, pref);
 		}
 		catch (UnknownHostException e) {
-//			dia.setMessage("Invalid Host");
-//			AlertDialog alert = dia.create();
-//			alert.setTitle("Alert");
-//			alert.show();
+			//			dia.setMessage("Invalid Host");
+			//			AlertDialog alert = dia.create();
+			//			alert.setTitle("Alert");
+			//			alert.show();
 			this.finish();
 
 		}
 		catch (SocketException e) {
-//			dia.setMessage("Invalid socket");
-//			AlertDialog alert = dia.create();
-//			alert.setTitle("Alert");
-//			alert.show();
+			//			dia.setMessage("Invalid socket");
+			//			AlertDialog alert = dia.create();
+			//			alert.setTitle("Alert");
+			//			alert.show();
 			this.finish();
 		}
 	}
@@ -80,7 +86,7 @@ public class MouseArea extends Activity implements OnTouchListener{
 
 		float x = event.getX();
 		float y = event.getY();
-		
+
 		switch(event.getAction())
 		{
 		case MotionEvent.ACTION_DOWN:
@@ -92,27 +98,59 @@ public class MouseArea extends Activity implements OnTouchListener{
 			this.startY = 0;
 			break;
 		}
-		
+
 
 		try{
-			if(this.startX < x && this.startY < y)
-				client.updatePointer(1, 1);
-			else if(this.startX > x && this.startY > y)
-				client.updatePointer(-1, -1);
-			else if(this.startX < x && this.startY > y)
-				client.updatePointer(1, -1);
-			else if(this.startX > x && this.startY < y)
-				client.updatePointer(-1, 1);
+			//			if(this.startX < x )
+			//				client.updatePointer(1, 0);
+			//			if(this.startX > x )
+			//				client.updatePointer(-1, 0);
+			//			if(this.startY > y)
+			//				client.updatePointer(0, -1);
+			//			if(this.startY < y)
+			//				client.updatePointer(0, 1);
+			if(this.previousX + this.moveBuffer > x && this.previousX -this.moveBuffer < x && this.previousY + this.moveBuffer > y && this.previousY-this.moveBuffer < y)
+			{
+				//Do nothing because the finger stayed in the same position
+			}
+			else if(this.previousX + this.moveBuffer > x && this.previousX -this.moveBuffer < x)
+			{
+				if( y-this.startY < 0)
+					client.updatePointer(0,-1);
+				else
+					client.updatePointer(0, 1);					
+			}
+			else if(this.previousY + this.moveBuffer > y && this.previousY-this.moveBuffer < y)
+			{
+				if( x-this.startX < 0)
+					client.updatePointer(-1,0);
+				else
+					client.updatePointer(1, 0);	
+			}
+			else{
 				
+				if( x-this.startX < 0 && y-this.startY < 0)
+					client.updatePointer(-1,-1);
+				else if (x-this.startX > 0 && y-this.startY > 0)
+					client.updatePointer(1, 1);	
+				else if (x-this.startX < 0 && y-this.startY > 0)
+					client.updatePointer(-1, 1);
+				else if (x-this.startX > 0 && y-this.startY < 0)
+					client.updatePointer(1, -1);	
+			}
+			
+			this.previousX = x;
+			this.previousY = y;
+
 		}
 		catch (IOException e) {
-//			dia.setMessage("Could not send coordinates");
-//			AlertDialog alert = dia.create();
-//			alert.setTitle("Alert");
-//			alert.show();
+			//			dia.setMessage("Could not send coordinates");
+			//			AlertDialog alert = dia.create();
+			//			alert.setTitle("Alert");
+			//			alert.show();
 			this.finish();
 		}
-		
+
 		return true;
 	}
 
