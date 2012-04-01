@@ -8,10 +8,12 @@ import com.maggen.udp.client.UDPClient;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.view.MotionEvent;
 import android.view.SurfaceView;
 import android.view.View;
@@ -41,7 +43,8 @@ public class MouseArea extends Activity implements OnTouchListener{
 //		dia = new AlertDialog.Builder(this);
 
 		try{
-			client = new UDPClient(WiMouseActivity.ip);
+			SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(this.getBaseContext());
+			client = new UDPClient(WiMouseActivity.ip, pref);
 		}
 		catch (UnknownHostException e) {
 //			dia.setMessage("Invalid Host");

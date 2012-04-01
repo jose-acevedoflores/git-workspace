@@ -7,20 +7,28 @@ import java.net.InetAddress;
 import java.net.SocketException;
 import java.net.UnknownHostException;
 
+import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
 import android.util.Log;
 
 public class UDPClient {
 
-	private static final int port = 9876;
 	private DatagramSocket socket;
 	private InetAddress address;
 	private int portI;
 
-	public UDPClient(String ip) throws SocketException, UnknownHostException
+	public UDPClient(String ip, SharedPreferences prefs) throws SocketException, UnknownHostException
 	{
-		//default port
-		portI = 9876;
-
+		
+		String port = prefs.getString("port", "9876");
+		//default port 9876
+		try{
+			portI = Integer.parseInt(port);
+		}
+		catch (NumberFormatException e) {
+			portI = 9876;
+		}
+		
 		socket = new DatagramSocket();
 		address = InetAddress.getByName(ip);
 		Log.d("UDP", "creation");
