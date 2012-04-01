@@ -23,7 +23,7 @@ public class WiMouseServer {
 		while(true)
 		{
 			System.out.println("Updating");
-			movement  =server.receive();
+			movement = server.receive();
 			mover.updatePointer(movement);
 		}
 

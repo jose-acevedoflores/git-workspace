@@ -101,14 +101,7 @@ public class MouseArea extends Activity implements OnTouchListener{
 
 
 		try{
-			//			if(this.startX < x )
-			//				client.updatePointer(1, 0);
-			//			if(this.startX > x )
-			//				client.updatePointer(-1, 0);
-			//			if(this.startY > y)
-			//				client.updatePointer(0, -1);
-			//			if(this.startY < y)
-			//				client.updatePointer(0, 1);
+	
 			if(this.previousX + this.moveBuffer > x && this.previousX -this.moveBuffer < x && this.previousY + this.moveBuffer > y && this.previousY-this.moveBuffer < y)
 			{
 				//Do nothing because the finger stayed in the same position
