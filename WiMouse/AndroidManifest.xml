@@ -41,6 +41,15 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".menu.Settings"
+            android:label="@string/app_name" >
+            <intent-filter>
+                <action android:name="com.maggen.wimouse.menu.SETTINGS" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
     </application>
 
 </manifest>
