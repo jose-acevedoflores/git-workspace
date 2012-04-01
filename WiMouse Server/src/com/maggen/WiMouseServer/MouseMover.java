@@ -32,11 +32,11 @@ public class MouseMover {
 		
 //		int xFromAndroid = (int) Float.parseFloat(split[0].trim());
 //		int yFromAndroid = (int) Float.parseFloat(split[1].trim());
-//		
+		
 		int x = (int) p.getX();
 		int y = (int) p.getY();
-		
-		robot.mouseMove(x+xFromAndroid, y+yFromAndroid);
+		for(int i = 0 ; i < 16 ; i++)
+			robot.mouseMove(x+xFromAndroid, y+yFromAndroid);
 	}
 	
 }

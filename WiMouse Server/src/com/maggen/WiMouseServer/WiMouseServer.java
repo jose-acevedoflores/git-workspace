@@ -17,12 +17,14 @@ public class WiMouseServer {
 			e.printStackTrace();
 			System.exit(-1);
 		}
-		
+
 		System.out.println("Server Running");
+		String movement="";
 		while(true)
 		{
 			System.out.println("Updating");
-			mover.updatePointer(server.receive());
+			movement  =server.receive();
+			mover.updatePointer(movement);
 		}
 
 	}
