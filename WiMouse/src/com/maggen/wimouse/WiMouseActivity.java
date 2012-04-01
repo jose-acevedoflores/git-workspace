@@ -3,7 +3,9 @@ package com.maggen.wimouse;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -12,6 +14,7 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.TextView;
 
 public class WiMouseActivity extends Activity {
 
@@ -20,6 +23,7 @@ public class WiMouseActivity extends Activity {
 	private ListView previousIPs;
 	private AlertDialog.Builder dia;
 	public static String ip ="";
+	public static TextView info;
 
 	/** Called when the activity is first created. */
 	@Override
@@ -50,6 +54,14 @@ public class WiMouseActivity extends Activity {
 
 		// initialize the alert dialog just in case.
 		dia = new AlertDialog.Builder(this);
+		
+		//Get the preference to access the port 
+		SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(this.getBaseContext());
+		String port = pref.getString("port", "9876");
+		
+		//Initialize the field to show the port
+		info = (TextView) findViewById(R.id.tvInfo);
+		info.setText(info.getText() +" Port: "+port);
 	}
 
 	public void onPause()
@@ -76,7 +88,7 @@ public class WiMouseActivity extends Activity {
 
 		case R.id.settings:
 			Intent settings = new Intent("com.maggen.wimouse.menu.SETTINGS");
-			startActivity(settings);		
+			startActivity(settings);
 			break;
 			
 		case R.id.exit:
