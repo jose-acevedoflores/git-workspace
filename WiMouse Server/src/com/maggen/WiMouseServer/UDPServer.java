@@ -15,14 +15,14 @@ public class UDPServer {
 		//Default
 		this.port = port;
 		try {
-			socket = new DatagramSocket(port);
+			socket = new DatagramSocket(this.port);
 		} catch (SocketException e) {
 			e.printStackTrace();
 		}
 	}
 	
 	
-	public String start()
+	public String receive()
 	{
 		byte[] dataReceived = new byte[1024];
 		DatagramPacket packet = new DatagramPacket(dataReceived, dataReceived.length);

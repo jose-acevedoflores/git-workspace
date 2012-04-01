@@ -14,7 +14,6 @@ public class MouseMover {
 	public MouseMover() throws AWTException
 	{
 		this.robot = new Robot();
-		this.inf  = MouseInfo.getPointerInfo();
 	}
 	
 	/**
@@ -23,12 +22,18 @@ public class MouseMover {
 	 */
 	public void updatePointer(String movement)
 	{
+		this.inf  = MouseInfo.getPointerInfo();
 		Point p = inf.getLocation();
+		
+		String[] split = movement.split(",");
+		
+		int xFromAndroid = (int) Float.parseFloat(split[0]);
+		int yFromAndroid = (int) Float.parseFloat(split[1]);
 		
 		int x = (int) p.getX();
 		int y = (int) p.getY();
 		
-		robot.mouseMove(0, 0);
+		robot.mouseMove(x+xFromAndroid, y+yFromAndroid);
 	}
 	
 }

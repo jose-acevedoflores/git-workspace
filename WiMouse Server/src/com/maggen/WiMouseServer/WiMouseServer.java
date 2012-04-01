@@ -1,5 +1,7 @@
 package com.maggen.WiMouseServer;
 
+import java.awt.AWTException;
+
 public class WiMouseServer {
 
 	/**
@@ -8,11 +10,19 @@ public class WiMouseServer {
 	public static void main(String[] args) {
 
 		UDPServer server = new UDPServer(9476);
+		MouseMover mover=null;
+		try {
+			mover = new MouseMover();
+		} catch (AWTException e) {
+			e.printStackTrace();
+			System.exit(-1);
+		}
 		
 		System.out.println("Server Running");
 		while(true)
 		{
-			System.out.println(server.start());
+			System.out.println("Updating");
+			mover.updatePointer(server.receive());
 		}
 
 	}
