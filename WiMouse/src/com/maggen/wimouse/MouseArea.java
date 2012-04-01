@@ -14,6 +14,7 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.SurfaceView;
 import android.view.View;
@@ -25,6 +26,8 @@ public class MouseArea extends Activity implements OnTouchListener{
 
 	private Pad view;
 	private UDPClient client;
+	private float startX;
+	private float startY;
 //	private AlertDialog.Builder dia;
 
 	public void onCreate(Bundle savedInstanceSate)
@@ -39,6 +42,10 @@ public class MouseArea extends Activity implements OnTouchListener{
 		view.setOnTouchListener(this);
 		this.setContentView(view);
 
+		//initializing the start cooedinates of the touche event
+		this.startX = 0;
+		this.startY=0;
+		
 		//Initialize alert dialog 
 //		dia = new AlertDialog.Builder(this);
 
@@ -74,11 +81,22 @@ public class MouseArea extends Activity implements OnTouchListener{
 
 		float x = event.getX();
 		float y = event.getY();
-
-		//Log.d("update", "x "+x+" y "+y);
+		
+		switch(event.getAction())
+		{
+		case MotionEvent.ACTION_DOWN:
+			this.startX = x;
+			this.startY = y;
+			break;
+		case MotionEvent.ACTION_UP:
+			this.startX = 0;
+			this.startY = 0;
+			break;
+		}
+		
 
 		try{
-			client.updatePointer(x, y);
+			client.updatePointer(x -this.startX, y -this.startY);
 		}
 		catch (IOException e) {
 //			dia.setMessage("Could not send coordinates");
@@ -87,7 +105,7 @@ public class MouseArea extends Activity implements OnTouchListener{
 //			alert.show();
 			this.finish();
 		}
-
+		
 		return true;
 	}
 
