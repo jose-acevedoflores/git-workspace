@@ -27,8 +27,8 @@ public class MouseMover {
 		
 		String[] split = movement.split(",");
 		
-		int xFromAndroid = (int) Float.parseFloat(split[0]);
-		int yFromAndroid = (int) Float.parseFloat(split[1]);
+		int xFromAndroid = Integer.parseInt(split[0].trim());
+		int yFromAndroid = Integer.parseInt(split[1].trim());
 		
 		int x = (int) p.getX();
 		int y = (int) p.getY();

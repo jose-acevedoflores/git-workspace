@@ -14,7 +14,6 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
-import android.util.Log;
 import android.view.MotionEvent;
 import android.view.SurfaceView;
 import android.view.View;
@@ -96,7 +95,15 @@ public class MouseArea extends Activity implements OnTouchListener{
 		
 
 		try{
-			client.updatePointer(x -this.startX, y -this.startY);
+			if(this.startX < x && this.startY < y)
+				client.updatePointer(1, 1);
+			else if(this.startX > x && this.startY > y)
+				client.updatePointer(-1, -1);
+			else if(this.startX < x && this.startY > y)
+				client.updatePointer(1, -1);
+			else if(this.startX > x && this.startY < y)
+				client.updatePointer(-1, 1);
+				
 		}
 		catch (IOException e) {
 //			dia.setMessage("Could not send coordinates");

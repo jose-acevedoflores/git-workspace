@@ -8,7 +8,6 @@ import java.net.SocketException;
 import java.net.UnknownHostException;
 
 import android.content.SharedPreferences;
-import android.preference.PreferenceManager;
 import android.util.Log;
 
 public class UDPClient {
@@ -35,7 +34,7 @@ public class UDPClient {
 
 	}
 
-	public void updatePointer(float x , float y) throws IOException
+	public void updatePointer(int x , int y) throws IOException
 	{
 		byte[] data = new byte[1024];
 		String str = x+","+y;
