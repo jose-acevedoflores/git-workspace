@@ -10,10 +10,10 @@ public class UDPServer {
 	private DatagramSocket socket;
 	private int port;
 	
-	public UDPServer()
+	public UDPServer(int port)
 	{
 		//Default
-		port = 9876;
+		this.port = port;
 		try {
 			socket = new DatagramSocket(port);
 		} catch (SocketException e) {
