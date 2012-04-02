@@ -34,10 +34,10 @@ public class UDPClient {
 
 	}
 
-	public void updatePointer(int x , int y, float time) throws IOException
+	public void updatePointer(int x , int y, int prevX, int prevY) throws IOException
 	{
 		byte[] data = new byte[1024];
-		String str = x+","+y+","+time;
+		String str = x+","+y+","+prevX+","+prevY;
 
 		data = str.getBytes();
 

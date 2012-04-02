@@ -29,25 +29,20 @@ public class MouseMover {
 
 		int xFromAndroid = Integer.parseInt(split[0].trim()) ;
 		int yFromAndroid = Integer.parseInt(split[1].trim()) ;
-		float speed = Float.parseFloat(split[2].trim());
-
+		int prevX = Integer.parseInt(split[2].trim());
+		int prevY = Integer.parseInt(split[3].trim());
+		
 		//		int xFromAndroid = (int) Float.parseFloat(split[0].trim());
 		//		int yFromAndroid = (int) Float.parseFloat(split[1].trim());
 
 		int x = (int) p.getX();
 		int y = (int) p.getY();
+		
+		System.out.println("X: "+xFromAndroid +", Y: "+yFromAndroid+" PrevX: "+prevX+" PrevY: "+prevY);
+		int newX = xFromAndroid-prevX;
+		int newY = yFromAndroid-prevY;
+		robot.mouseMove(x+newX, y+newY);
 
-		System.out.println(speed);
-		
-		if(speed > .5)
-			robot.mouseMove(x+xFromAndroid*2, y+yFromAndroid*2);
-		
-		else if(speed > 1)
-			robot.mouseMove(x+xFromAndroid*4, y+yFromAndroid*4);
-		else 
-			robot.mouseMove(x+xFromAndroid, y+yFromAndroid);
-			
-			
 	}
 
 }

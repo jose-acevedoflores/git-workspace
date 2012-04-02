@@ -25,13 +25,8 @@ public class MouseArea extends Activity implements OnTouchListener{
 
 	private Pad view;
 	private UDPClient client;
-	private float startX;
-	private float startY;
 	private float previousX;
 	private float previousY;
-	private int moveBuffer;
-	private long startTime;
-	private long endTime;
 	//	private AlertDialog.Builder dia;
 
 	public void onCreate(Bundle savedInstanceSate)
@@ -47,11 +42,8 @@ public class MouseArea extends Activity implements OnTouchListener{
 		this.setContentView(view);
 
 		//initializing the start coordinates of the touch event
-		this.startX = 0;
-		this.startY=0;
 		this.previousX = 0; 
 		this.previousY= 0;
-		this.moveBuffer =2;
 
 		//Initialize alert dialog 
 		//		dia = new AlertDialog.Builder(this);
@@ -88,65 +80,28 @@ public class MouseArea extends Activity implements OnTouchListener{
 
 		float x = event.getX();
 		float y = event.getY();
-
-		this.endTime = System.currentTimeMillis();
-
+		
 		switch(event.getAction())
 		{
 		case MotionEvent.ACTION_DOWN:
-			this.startX = x;
-			this.startY = y;
-			this.startTime = System.currentTimeMillis();
+			
 			break;
 		case MotionEvent.ACTION_UP:
-			this.startX = 0;
-			this.startY = 0;
-			this.startTime = 0;
-			break;
+			this.previousX = 0;
+			this.previousY = 0;
+			return true;
 		default:
 			break;
 		}
 
-
+		
 		try{
-			float distance = (float) Math.sqrt(Math.pow(this.startX - x, 2) + Math.pow(this.startY - y, 2))/(this.endTime-this.startTime) ; 
-	
-			if(this.previousX + this.moveBuffer > x && this.previousX -this.moveBuffer < x && this.previousY + this.moveBuffer > y && this.previousY-this.moveBuffer < y)
-			{
-				//Do nothing because the finger stayed in the same position
-			}
-			else if(this.previousX + this.moveBuffer > x && this.previousX -this.moveBuffer < x)
-			{
-				if( y-this.startY < 0)
-					client.updatePointer(0,-3 , distance);
-				else
-					client.updatePointer(0, 3, distance);					
-			}
-			else if(this.previousY + this.moveBuffer > y && this.previousY-this.moveBuffer < y)
-			{
-				if( x-this.startX < 0)
-					client.updatePointer(-3,0, distance);
-				else
-					client.updatePointer(3, 0, distance);	
-			}
-			else{
-				
-				if( x-this.startX < 0 && y-this.startY < 0)
-					client.updatePointer(-3,-3, distance);
-				
-				else if (x-this.startX > 0 && y-this.startY > 0)
-					client.updatePointer(3, 3, distance);
-				
-				else if (x-this.startX < 0 && y-this.startY > 0)
-					client.updatePointer(-3, 3, distance);
-				
-				else if (x-this.startX > 0 && y-this.startY < 0)
-					client.updatePointer(3, -3, distance);	
-			}
+			if(this.previousX != 0 && this.previousY != 0)
+				client.updatePointer((int) x,(int) y, (int) this.previousX, (int) this.previousY);
 			
 			this.previousX = x;
 			this.previousY = y;
-
+			
 		}
 		catch (IOException e) {
 			//			dia.setMessage("Could not send coordinates");
