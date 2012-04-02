@@ -7,13 +7,17 @@ import java.net.UnknownHostException;
 import com.maggen.udp.client.UDPClient;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.os.Bundle;
+import android.os.Handler;
 import android.preference.PreferenceManager;
+import android.util.Log;
+import android.view.KeyEvent;
 import android.view.MotionEvent;
 import android.view.SurfaceView;
 import android.view.View;
@@ -27,7 +31,8 @@ public class MouseArea extends Activity implements OnTouchListener{
 	private UDPClient client;
 	private float previousX;
 	private float previousY;
-	//	private AlertDialog.Builder dia;
+	private AlertDialog.Builder dia;
+	private MyAlert alert;
 
 	public void onCreate(Bundle savedInstanceSate)
 	{
@@ -46,25 +51,42 @@ public class MouseArea extends Activity implements OnTouchListener{
 		this.previousY= 0;
 
 		//Initialize alert dialog 
-		//		dia = new AlertDialog.Builder(this);
+		dia = new AlertDialog.Builder(this);
 
 		try{
 			SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(this.getBaseContext());
 			client = new UDPClient(WiMouseActivity.ip, pref);
 		}
 		catch (UnknownHostException e) {
-			//			dia.setMessage("Invalid Host");
-			//			AlertDialog alert = dia.create();
-			//			alert.setTitle("Alert");
-			//			alert.show();
+			dia.setMessage("Invalid Host");
+			AlertDialog alert = dia.create();
+			alert.setTitle("Alert");
+			alert.show();
+			
+			//Pause for a moment to show the alert dialog, then finish this Activity
+			Handler handler = new Handler();
+			handler.postDelayed(new Runnable() {
+				public void run() {
+					finish();
+				}
+			}, 6000);
+
 			this.finish();
 
 		}
 		catch (SocketException e) {
-			//			dia.setMessage("Invalid socket");
-			//			AlertDialog alert = dia.create();
-			//			alert.setTitle("Alert");
-			//			alert.show();
+			dia.setMessage("Invalid socket");
+			AlertDialog alert = dia.create();
+			alert.setTitle("Alert");
+			alert.show();
+
+			Handler handler = new Handler();
+			handler.postDelayed(new Runnable() {
+				public void run() {
+					finish();
+				}
+			}, 6000);
+
 			this.finish();
 		}
 	}
@@ -80,11 +102,11 @@ public class MouseArea extends Activity implements OnTouchListener{
 
 		float x = event.getX();
 		float y = event.getY();
-		
+
 		switch(event.getAction())
 		{
 		case MotionEvent.ACTION_DOWN:
-			
+
 			break;
 		case MotionEvent.ACTION_UP:
 			this.previousX = 0;
@@ -94,26 +116,46 @@ public class MouseArea extends Activity implements OnTouchListener{
 			break;
 		}
 
-		
+
 		try{
 			if(this.previousX != 0 && this.previousY != 0)
 				client.updatePointer((int) x,(int) y, (int) this.previousX, (int) this.previousY);
-			
+
 			this.previousX = x;
 			this.previousY = y;
-			
+
 		}
 		catch (IOException e) {
-			//			dia.setMessage("Could not send coordinates");
-			//			AlertDialog alert = dia.create();
-			//			alert.setTitle("Alert");
-			//			alert.show();
-			this.finish();
+
+			dia.setMessage("Could not send coordinates");
+			AlertDialog alert = dia.create();
+			alert.setTitle("Alert");
+			alert.show();
+
+			Handler handler = new Handler();
+			handler.postDelayed(new Runnable() {
+				public void run() {
+					finish();
+				}
+			}, 6000);
+
 		}
 
 		return true;
 	}
 
+	private class MyAlert extends AlertDialog{
+
+		protected MyAlert(Context context) {
+			super(context);
+		}
+		
+		public boolean onKeyDown(int keycode, KeyEvent event)
+		{
+			return true;
+		}
+		
+	}
 
 	/*-------------------------Private class -------------------------------------*/
 
