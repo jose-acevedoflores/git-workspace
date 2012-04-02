@@ -38,8 +38,16 @@ public class MouseMover {
 		int y = (int) p.getY();
 
 		System.out.println(speed);
-
-		robot.mouseMove(x+xFromAndroid, y+yFromAndroid);
+		
+		if(speed > .5)
+			robot.mouseMove(x+xFromAndroid*2, y+yFromAndroid*2);
+		
+		else if(speed > 1)
+			robot.mouseMove(x+xFromAndroid*4, y+yFromAndroid*4);
+		else 
+			robot.mouseMove(x+xFromAndroid, y+yFromAndroid);
+			
+			
 	}
 
 }
