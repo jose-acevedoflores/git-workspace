@@ -9,7 +9,23 @@ import java.awt.Robot;
 public class MouseMover {
 
 	private Robot robot;
+
 	private PointerInfo inf;
+	private Point pointerLocation;
+
+	private int xFromAndroid;
+	private int yFromAndroid;
+
+	private int prevX;
+	private int prevY;
+
+	private int pointerX;
+	private int pointerY;
+
+	private int newX;
+	private int newY;
+
+	private String[] split;
 
 	public MouseMover() throws AWTException
 	{
@@ -23,25 +39,23 @@ public class MouseMover {
 	public void updatePointer(String movement)
 	{
 		this.inf  = MouseInfo.getPointerInfo();
-		Point p = inf.getLocation();
+		pointerLocation = inf.getLocation();
 
-		String[] split = movement.split(",");
+		split = movement.split(",");
 
-		int xFromAndroid = Integer.parseInt(split[0].trim()) ;
-		int yFromAndroid = Integer.parseInt(split[1].trim()) ;
-		int prevX = Integer.parseInt(split[2].trim());
-		int prevY = Integer.parseInt(split[3].trim());
+		xFromAndroid = Integer.parseInt(split[0].trim()) ;
+		yFromAndroid = Integer.parseInt(split[1].trim()) ;
+		prevX = Integer.parseInt(split[2].trim());
+		prevY = Integer.parseInt(split[3].trim());
+
+		pointerX = (int) pointerLocation.getX();
+		pointerY = (int) pointerLocation.getY();
+
+	//	System.out.println("X: "+xFromAndroid +", Y: "+yFromAndroid+" PrevX: "+prevX+" PrevY: "+prevY);
 		
-		//		int xFromAndroid = (int) Float.parseFloat(split[0].trim());
-		//		int yFromAndroid = (int) Float.parseFloat(split[1].trim());
-
-		int x = (int) p.getX();
-		int y = (int) p.getY();
-		
-		System.out.println("X: "+xFromAndroid +", Y: "+yFromAndroid+" PrevX: "+prevX+" PrevY: "+prevY);
-		int newX = xFromAndroid-prevX;
-		int newY = yFromAndroid-prevY;
-		robot.mouseMove(x+newX, y+newY);
+		newX = xFromAndroid-prevX;
+		newY = yFromAndroid-prevY;
+		robot.mouseMove(pointerX+newX, pointerY+newY);
 
 	}
 
