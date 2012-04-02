@@ -34,7 +34,7 @@ public class UDPClient {
 
 	}
 
-	public void updatePointer(int x , int y, long time) throws IOException
+	public void updatePointer(int x , int y, float time) throws IOException
 	{
 		byte[] data = new byte[1024];
 		String str = x+","+y+","+time;

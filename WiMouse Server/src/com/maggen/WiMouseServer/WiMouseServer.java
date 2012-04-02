@@ -4,6 +4,7 @@ import java.awt.AWTException;
 
 public class WiMouseServer {
 
+
 	/**
 	 * @param args
 	 */
@@ -23,7 +24,6 @@ public class WiMouseServer {
 		while(true)
 		{
 			movement = server.receive();
-		//	System.out.println("Time: ");
 			mover.updatePointer(movement);
 		}
 

@@ -29,7 +29,7 @@ public class MouseMover {
 
 		int xFromAndroid = Integer.parseInt(split[0].trim()) ;
 		int yFromAndroid = Integer.parseInt(split[1].trim()) ;
-		long time = Long.parseLong(split[2].trim());
+		float speed = Float.parseFloat(split[2].trim());
 
 		//		int xFromAndroid = (int) Float.parseFloat(split[0].trim());
 		//		int yFromAndroid = (int) Float.parseFloat(split[1].trim());
@@ -37,9 +37,9 @@ public class MouseMover {
 		int x = (int) p.getX();
 		int y = (int) p.getY();
 
-		robot.mouseMove( x+xFromAndroid, y+yFromAndroid);
-		System.out.println(time);
+		System.out.println(speed);
 
+		robot.mouseMove(x+xFromAndroid, y+yFromAndroid);
 	}
 
 }
