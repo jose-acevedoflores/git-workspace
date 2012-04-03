@@ -15,9 +15,7 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.os.Bundle;
 import android.os.Handler;
-import android.os.Message;
 import android.preference.PreferenceManager;
-import android.util.Log;
 import android.view.MotionEvent;
 import android.view.SurfaceView;
 import android.view.View;
@@ -62,21 +60,11 @@ public class MouseArea extends Activity implements OnTouchListener{
 			alert.show();
 
 			//Pause for a moment to show the alert dialog, then finish this Activity
-			final Handler handler = new Handler() {
-
-				public void dispatchMessage(Message m)
-				{
-					super.dispatchMessage(m);
-					Log.d("Handler", "in dispatch");
-					if(alert.isShowing())
-						alert.dismiss();
-				}
-
-			};
+			Handler handler = new Handler();
 			handler.postDelayed(new Runnable() {
 				public void run() {
-					//In here nothing happens but the dispatchMessage from the handler is called an the 
-					// the dialog is dismissed.
+					if(alert.isShowing())
+						alert.dismiss();
 				}
 			}, 6000);
 
@@ -88,21 +76,11 @@ public class MouseArea extends Activity implements OnTouchListener{
 			alert.setTitle("Alert");
 			alert.show();
 
-			final Handler handler = new Handler() {
-
-				public void dispatchMessage(Message m)
-				{
-					super.dispatchMessage(m);
-					Log.d("Handler", "in dispatch");
-					if(alert.isShowing())
-						alert.dismiss();
-				}
-
-			};
+			Handler handler = new Handler(); 
 			handler.postDelayed(new Runnable() {
 				public void run() {
-					//In here nothing happens but the dispatchMessage from the handler is called an the 
-					// the dialog is dismissed.
+					if(alert.isShowing())
+						alert.dismiss();
 				}
 			}, 6000);
 
@@ -144,40 +122,26 @@ public class MouseArea extends Activity implements OnTouchListener{
 
 		}
 		catch (IOException e) {
-			
+
 			AlertDialog.Builder dia = new AlertDialog.Builder(this);
 			dia.setMessage("Could not send coordinates");
 			final AlertDialog alert = dia.create();
 			alert.setTitle("Alert");
 			alert.show();
 
-			final Handler handler = new Handler() {
-
-				public void dispatchMessage(Message m)
-				{
-					super.dispatchMessage(m);
-					Log.d("Handler", "in dispatch");
+			Handler handler = new Handler();
+			handler.postDelayed(new Runnable() {
+				public void run() {
 					if(alert.isShowing())
 						alert.dismiss();
 				}
-
-			};
-			handler.postDelayed(new Runnable() {
-				public void run() {
-					//In here nothing happens but the dispatchMessage from the handler is called an the 
-					// the dialog is dismissed.
-				}
 			}, 6000);
-			
+
 
 		}
 
 		return true;
 	}
-
-
-	/*-------------------------Private class -------------------------------------*/
-
 
 
 	/*-------------------------Private class -------------------------------------*/

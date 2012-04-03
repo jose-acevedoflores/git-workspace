@@ -26,7 +26,7 @@ public class MouseMover {
 	private int newY;
 
 	private String[] split;
-
+	
 	public MouseMover() throws AWTException
 	{
 		this.robot = new Robot();
@@ -55,7 +55,7 @@ public class MouseMover {
 		
 		newX = xFromAndroid-prevX;
 		newY = yFromAndroid-prevY;
-		robot.mouseMove(pointerX+newX, pointerY+newY);
+		robot.mouseMove(pointerX+newX,pointerY+newY);
 
 	}
 
