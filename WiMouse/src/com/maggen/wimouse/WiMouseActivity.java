@@ -54,21 +54,20 @@ public class WiMouseActivity extends Activity {
 
 	private void checkIPHistory()
 	{
-		String sArr = null;
+		String sArr = "";
 		String temp="";
-		for(int i = 0 ; i < historyMax; i++)
+		for(int i = 0 ; i < this.pref.getInt("ipHistory", 0); i++)
 		{
 			temp = this.pref.getString("ip"+i, "-1");
 			//if the ip# is not equal to -1 then it should be a valid ip.
 			if(!temp.equals("-1"))
-			{
-				sArr = temp+":";
-			}
+				sArr += temp+":";
+			Log.d("temp", temp);
 		}
 
-		//Get rid of the : at the end
-		if(sArr != null)
+		if(!sArr.equals(""))
 		{
+			//Get rid of the : at the end
 			sArr = sArr.substring(0, sArr.length()-1);
 			ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1 , sArr.split(":"));
 
@@ -138,6 +137,41 @@ public class WiMouseActivity extends Activity {
 		}
 		return true;
 	}
+	
+	private void updateHistory(String ip)
+	{
+		int ipHistory = this.pref.getInt("ipHistory", 0);
+		SharedPreferences.Editor editor = pref.edit();
+		if(ipHistory == 0)
+		{
+			editor.putInt("ipHistory", 1);
+			editor.putString("ip0", ip);
+			editor.apply();
+			return;
+		}
+		else
+		{
+			Log.d("Update", ""+ipHistory);
+			if(ipHistory < historyMax )
+			{
+				editor.putString("ip"+ipHistory, ip);
+				editor.putInt("ipHistory", ++ipHistory);
+				editor.apply();
+				return;
+			}
+			else
+			{
+				for(int i = 0 ; i < historyMax-1; i++)
+				{
+					editor.putString("ip"+(i+1), this.pref.getString("ip"+i, "-1"));
+				}
+				editor.putString("ip0", ip);
+				editor.apply();
+				return;	
+			}
+		}
+		
+	}
 
 	/*-------------------------Private class -------------------------------------*/
 
@@ -153,12 +187,9 @@ public class WiMouseActivity extends Activity {
 
 			ip = ip.substring(0,ip.length()-1);
 
-			SharedPreferences.Editor editor = pref.edit();
-			editor.putString("ip2", "10.0.0.93");
-			editor.apply();
-
 			if(this.checkValidIP())
 			{
+				updateHistory(ip);
 				Intent i = new Intent("android.intent.action.MOUSEAREA");
 				startActivity(i);
 			}
