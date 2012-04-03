@@ -1,14 +1,10 @@
 package com.maggen.wimouse;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.StringWriter;
 
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.content.res.AssetManager;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.util.Log;
@@ -17,6 +13,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
@@ -26,12 +23,13 @@ public class WiMouseActivity extends Activity {
 
 	private Button startButton;
 	private EditText[] ipFields;
-	
+
 	private ListView previousIPs;
-	private String ipHistory;
-	
+	private static final int historyMax = 5;
+
 	private AlertDialog.Builder dia;
-	private AssetManager history;
+	private SharedPreferences pref;
+
 
 	public static String ip ="";
 	public static TextView info;
@@ -40,39 +38,42 @@ public class WiMouseActivity extends Activity {
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+
 		//Set what is going to be displayed to the user.
 		setContentView(R.layout.main);
+		
+		pref = PreferenceManager.getDefaultSharedPreferences(this.getBaseContext());
+		//Initialize the list view
+		this.previousIPs = (ListView) findViewById(R.id.lvPreviousIP);
 
-		this.checkAssets();
+		this.checkIPHistory();
 
 		//Initialize the variables.
 		this.initializeVars();
 	}
 
-	private void checkAssets()
+	private void checkIPHistory()
 	{
-		InputStream in=null;
-		//Initialize a string writer to save the data from the input stream
-		StringWriter sw= new StringWriter(100);
-		//Get the assets of this application 
-		history = this.getAssets();
-		try{
-			//Check the file history.txt (IOexception)
-			in = this.history.open("history.txt");
-			int n;
-			
-			//While in.read() is not -1 (end of input stream)
-			while((n = in.read()) != -1)
-				//Write to the string writer the character found.
-				sw.write(n);
-			
-			//Close the stream.
-			in.close();
-			this.ipHistory = sw.toString();
-			Log.d("History", "Content: "+this.ipHistory);
+		String sArr = null;
+		String temp="";
+		for(int i = 0 ; i < historyMax; i++)
+		{
+			temp = this.pref.getString("ip"+i, "-1");
+			//if the ip# is not equal to -1 then it should be a valid ip.
+			if(!temp.equals("-1"))
+			{
+				sArr = temp+":";
+			}
 		}
-		catch (IOException e) {
-			Log.d("CheckAsset", "File not found");
+
+		//Get rid of the : at the end
+		if(sArr != null)
+		{
+			sArr = sArr.substring(0, sArr.length()-1);
+			ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1 , sArr.split(":"));
+
+			this.previousIPs.setAdapter(adapter);
+
 		}
 
 	}
@@ -82,9 +83,6 @@ public class WiMouseActivity extends Activity {
 		//Initialize the button
 		this.startButton = (Button) findViewById(R.id.bStart);
 		this.startButton.setOnClickListener(new ButtonListener());
-
-		//Initialize the list view
-		this.previousIPs = (ListView) findViewById(R.id.lvPreviousIP);
 
 		//Initialize the four ip fields.
 		this.ipFields = new EditText[4];
@@ -97,7 +95,6 @@ public class WiMouseActivity extends Activity {
 		dia = new AlertDialog.Builder(this);
 
 		//Get the preference to access the port 
-		SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(this.getBaseContext());
 		String port = pref.getString("port", "9876");
 
 		//Initialize the field to show the port
@@ -155,6 +152,10 @@ public class WiMouseActivity extends Activity {
 				ip += ipFields[i].getText().toString().trim()+".";
 
 			ip = ip.substring(0,ip.length()-1);
+
+			SharedPreferences.Editor editor = pref.edit();
+			editor.putString("ip2", "10.0.0.93");
+			editor.apply();
 
 			if(this.checkValidIP())
 			{
