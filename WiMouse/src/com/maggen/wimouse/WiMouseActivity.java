@@ -32,8 +32,15 @@ public class WiMouseActivity extends Activity {
 		//Set what is going to be displayed to the user.
 		setContentView(R.layout.main);
 
+		this.checkAssets();
+		
 		//Initialize the variables.
 		this.initializeVars();
+	}
+	
+	private void checkAssets()
+	{
+		
 	}
 
 	private void initializeVars()
