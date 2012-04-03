@@ -15,9 +15,9 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.Message;
 import android.preference.PreferenceManager;
 import android.util.Log;
-import android.view.KeyEvent;
 import android.view.MotionEvent;
 import android.view.SurfaceView;
 import android.view.View;
@@ -31,8 +31,6 @@ public class MouseArea extends Activity implements OnTouchListener{
 	private UDPClient client;
 	private float previousX;
 	private float previousY;
-	private AlertDialog.Builder dia;
-	private MyAlert alert;
 
 	public void onCreate(Bundle savedInstanceSate)
 	{
@@ -50,8 +48,8 @@ public class MouseArea extends Activity implements OnTouchListener{
 		this.previousX = 0; 
 		this.previousY= 0;
 
-		//Initialize alert dialog 
-		dia = new AlertDialog.Builder(this);
+		//Initialize alert dialog
+		AlertDialog.Builder dia = new AlertDialog.Builder(this);
 
 		try{
 			SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(this.getBaseContext());
@@ -59,35 +57,55 @@ public class MouseArea extends Activity implements OnTouchListener{
 		}
 		catch (UnknownHostException e) {
 			dia.setMessage("Invalid Host");
-			AlertDialog alert = dia.create();
+			final AlertDialog alert = dia.create();
 			alert.setTitle("Alert");
 			alert.show();
-			
+
 			//Pause for a moment to show the alert dialog, then finish this Activity
-			Handler handler = new Handler();
+			final Handler handler = new Handler() {
+
+				public void dispatchMessage(Message m)
+				{
+					super.dispatchMessage(m);
+					Log.d("Handler", "in dispatch");
+					if(alert.isShowing())
+						alert.dismiss();
+				}
+
+			};
 			handler.postDelayed(new Runnable() {
 				public void run() {
-					finish();
+					//In here nothing happens but the dispatchMessage from the handler is called an the 
+					// the dialog is dismissed.
 				}
 			}, 6000);
 
-			this.finish();
 
 		}
 		catch (SocketException e) {
 			dia.setMessage("Invalid socket");
-			AlertDialog alert = dia.create();
+			final AlertDialog alert = dia.create();
 			alert.setTitle("Alert");
 			alert.show();
 
-			Handler handler = new Handler();
+			final Handler handler = new Handler() {
+
+				public void dispatchMessage(Message m)
+				{
+					super.dispatchMessage(m);
+					Log.d("Handler", "in dispatch");
+					if(alert.isShowing())
+						alert.dismiss();
+				}
+
+			};
 			handler.postDelayed(new Runnable() {
 				public void run() {
-					finish();
+					//In here nothing happens but the dispatchMessage from the handler is called an the 
+					// the dialog is dismissed.
 				}
 			}, 6000);
 
-			this.finish();
 		}
 	}
 
@@ -126,36 +144,41 @@ public class MouseArea extends Activity implements OnTouchListener{
 
 		}
 		catch (IOException e) {
-
+			
+			AlertDialog.Builder dia = new AlertDialog.Builder(this);
 			dia.setMessage("Could not send coordinates");
-			AlertDialog alert = dia.create();
+			final AlertDialog alert = dia.create();
 			alert.setTitle("Alert");
 			alert.show();
 
-			Handler handler = new Handler();
+			final Handler handler = new Handler() {
+
+				public void dispatchMessage(Message m)
+				{
+					super.dispatchMessage(m);
+					Log.d("Handler", "in dispatch");
+					if(alert.isShowing())
+						alert.dismiss();
+				}
+
+			};
 			handler.postDelayed(new Runnable() {
 				public void run() {
-					finish();
+					//In here nothing happens but the dispatchMessage from the handler is called an the 
+					// the dialog is dismissed.
 				}
 			}, 6000);
+			
 
 		}
 
 		return true;
 	}
 
-	private class MyAlert extends AlertDialog{
 
-		protected MyAlert(Context context) {
-			super(context);
-		}
-		
-		public boolean onKeyDown(int keycode, KeyEvent event)
-		{
-			return true;
-		}
-		
-	}
+	/*-------------------------Private class -------------------------------------*/
+
+
 
 	/*-------------------------Private class -------------------------------------*/
 
