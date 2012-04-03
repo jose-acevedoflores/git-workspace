@@ -6,6 +6,12 @@ import java.awt.Point;
 import java.awt.PointerInfo;
 import java.awt.Robot;
 
+
+/**
+ * This class holds the robot object that is in charge of moving the pointer
+ * @author Jose
+ *
+ */
 public class MouseMover {
 
 	private Robot robot;
@@ -33,8 +39,9 @@ public class MouseMover {
 	}
 
 	/**
-	 * Moves the pointer according to the movement in the android device.
-	 * @param movement Receives a string in this format (x-coordinate, y-coordinate)-on the android device  
+	 * Moves the pointer according to the movement of the finger in the android device.
+	 * @param movement Receives a string in this format
+	 *  (x-coordinate, y-coordinate, previous x-coordinate, previous y-coordinate)-on the android device  
 	 */
 	public void updatePointer(String movement)
 	{
