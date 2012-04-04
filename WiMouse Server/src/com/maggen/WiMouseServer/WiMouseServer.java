@@ -3,6 +3,8 @@ package com.maggen.WiMouseServer;
 import java.awt.AWTException;
 import java.awt.Dimension;
 import java.awt.Toolkit;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -65,14 +67,18 @@ public class WiMouseServer {
 		//100 is the portField number, this component is relative to 50 (background)
 		pane.add(portField, 100, 50);
 		pane.add(portLabel, 100, 50);
+		pane.add(startButton, 100, 50);
 		
 		this.panel.add(pane);
 		this.backgroundLabel.setBounds(0, 0, background.getIconWidth(), background.getIconHeight());
 		this.portField.setBounds(295, 330, 100, 30);
 		this.portLabel.setBounds(210, 330, 100, 30);
+		this.startButton.setBounds(150, 100, 100, 50);
+		
+		this.startButton.addActionListener(new StartButtonListener());
 		
 		//default port
-		port = 9476;
+		port = 9876;
 		
 		//server on default port
 		server = new UDPServer(port);
@@ -103,7 +109,24 @@ public class WiMouseServer {
 		}
 	}
 	
-	
+	private class StartButtonListener implements ActionListener{
+
+		@Override
+		public void actionPerformed(ActionEvent e) 
+		{	
+			try{
+				int newPort = Integer.parseInt(portField.getText());
+				server = new UDPServer(newPort);
+				System.out.println("Server restarted");
+			}
+			catch (NumberFormatException w) {
+				//Illegal port number
+				//server stays with the default port
+				portField.setText("9876");
+			}
+		}
+		
+	}
 	
 	
 	/**
