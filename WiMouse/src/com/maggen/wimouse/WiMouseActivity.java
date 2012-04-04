@@ -41,11 +41,13 @@ public class WiMouseActivity extends Activity {
 
 		//Set what is going to be displayed to the user.
 		setContentView(R.layout.main);
+
 		
 		pref = PreferenceManager.getDefaultSharedPreferences(this.getBaseContext());
 		//Initialize the list view
 		this.previousIPs = (ListView) findViewById(R.id.lvPreviousIP);
 
+		//Check the ip history to show on the ListView
 		this.checkIPHistory();
 
 		//Initialize the variables.
@@ -147,7 +149,6 @@ public class WiMouseActivity extends Activity {
 			editor.putInt("ipHistory", 1);
 			editor.putString("ip0", ip);
 			editor.apply();
-			return;
 		}
 		else
 		{
@@ -161,7 +162,6 @@ public class WiMouseActivity extends Activity {
 				editor.putString("ip0", ip);
 				editor.putInt("ipHistory", ++ipHistory);
 				editor.apply();
-				return;
 			}
 			else
 			{
@@ -171,10 +171,9 @@ public class WiMouseActivity extends Activity {
 				}
 				editor.putString("ip0", ip);
 				editor.apply();
-				return;	
 			}
 		}
-		
+		this.checkIPHistory();
 	}
 
 	/*-------------------------Private class -------------------------------------*/
