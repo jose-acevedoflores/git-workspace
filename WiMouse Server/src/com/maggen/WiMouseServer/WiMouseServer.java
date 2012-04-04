@@ -3,12 +3,16 @@ package com.maggen.WiMouseServer;
 import java.awt.AWTException;
 
 import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
 
 public class WiMouseServer {
 
 	private UDPServer server;
 	private MouseMover mover;
 	private int port;
+	private JTextField portField;
+	private JPanel panel;
 
 	public WiMouseServer()
 	{
@@ -19,12 +23,20 @@ public class WiMouseServer {
 		frame.setLocationRelativeTo(null);
 		
 		this.initFileds();
-		
+		frame.add(panel);
 		frame.setVisible(true);
 	}
 	
 	private void initFileds()
 	{
+		//Initialize the panel
+		panel = new JPanel();
+		
+		//initialize the text field
+		this.portField = new JTextField(8);
+		
+		panel.add(portField);
+		
 		//default port
 		port = 9476;
 		
