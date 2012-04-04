@@ -44,7 +44,7 @@ public class WiMouseActivity extends Activity {
 		//Set what is going to be displayed to the user.
 		setContentView(R.layout.main);
 
-		
+
 		pref = PreferenceManager.getDefaultSharedPreferences(this.getBaseContext());
 		//Initialize the list view
 		this.previousIPs = (ListView) findViewById(R.id.lvPreviousIP);
@@ -141,7 +141,7 @@ public class WiMouseActivity extends Activity {
 		}
 		return true;
 	}
-	
+
 	/**
 	 * When a new ip is entered by the user this method places it in the preferences and updates
 	 * the listView.
@@ -162,20 +162,33 @@ public class WiMouseActivity extends Activity {
 			Log.d("Update", ""+ipHistory);
 			if(ipHistory < historyMax )
 			{
+				//Check if the ip entered is already present in the ListView.
 				for(int i = 0 ; i < ipHistory; i++)
-				{
+					 if(this.pref.getString("ip"+i, "-1").equals(ip))
+						 return;
+				
+				//This loop moves all the previously saved ip's one position forward
+				for(int i = 0 ; i < ipHistory; i++)
 					editor.putString("ip"+(i+1), this.pref.getString("ip"+i, "-1"));
-				}
+				
+				//Put the new ip in the first position
 				editor.putString("ip0", ip);
 				editor.putInt("ipHistory", ++ipHistory);
 				editor.apply();
 			}
 			else
 			{
+				//Check if the ip entered is already present in the ListView.
+				for(int i = 0 ; i < ipHistory; i++)
+					 if(this.pref.getString("ip"+i, "-1").equals(ip))
+						 return;
+				
+				//This loop moves all the previously saved ip's one position forward
+				//And the last item is lost
 				for(int i = 0 ; i < historyMax-1; i++)
-				{
 					editor.putString("ip"+(i+1), this.pref.getString("ip"+i, "-1"));
-				}
+				
+				//Put the new ip in the first position
 				editor.putString("ip0", ip);
 				editor.apply();
 			}
@@ -212,7 +225,7 @@ public class WiMouseActivity extends Activity {
 			}
 		}
 
-		
+
 		private boolean checkValidIP()
 		{
 			String ipA[] = ip.split("[.]");
@@ -239,19 +252,24 @@ public class WiMouseActivity extends Activity {
 
 	}
 	/*-------------------------Private class -------------------------------------*/
-	
+
 	private class ListViewListener implements OnItemClickListener{
 
 		@Override
 		public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-			
-			Log.d("LVListener", previousIPs.getItemAtPosition(position).toString());
+
+			String[] arr = previousIPs.getItemAtPosition(position).toString().split("[.]");
+			ipFields[0].setText(arr[0]);
+			ipFields[1].setText(arr[1]);
+			ipFields[2].setText(arr[2]);
+			ipFields[3].setText(arr[3]);
+
 			
 		}
-		
+
 	}
-	
-	
+
+
 	/*-------------------------Private class -------------------------------------*/
 
 }
