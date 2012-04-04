@@ -13,6 +13,8 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -72,7 +74,7 @@ public class WiMouseActivity extends Activity {
 			//Get rid of the : at the end
 			sArr = sArr.substring(0, sArr.length()-1);
 			ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1 , sArr.split(":"));
-
+			this.previousIPs.setOnItemClickListener(new ListViewListener());
 			this.previousIPs.setAdapter(adapter);
 
 		}
@@ -140,6 +142,11 @@ public class WiMouseActivity extends Activity {
 		return true;
 	}
 	
+	/**
+	 * When a new ip is entered by the user this method places it in the preferences and updates
+	 * the listView.
+	 * @param ip the ip string to add to the ListView
+	 */
 	private void updateHistory(String ip)
 	{
 		int ipHistory = this.pref.getInt("ipHistory", 0);
@@ -205,6 +212,7 @@ public class WiMouseActivity extends Activity {
 			}
 		}
 
+		
 		private boolean checkValidIP()
 		{
 			String ipA[] = ip.split("[.]");
@@ -230,6 +238,20 @@ public class WiMouseActivity extends Activity {
 		}
 
 	}
+	/*-------------------------Private class -------------------------------------*/
+	
+	private class ListViewListener implements OnItemClickListener{
+
+		@Override
+		public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+			
+			Log.d("LVListener", previousIPs.getItemAtPosition(position).toString());
+			
+		}
+		
+	}
+	
+	
 	/*-------------------------Private class -------------------------------------*/
 
 }
