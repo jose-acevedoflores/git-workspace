@@ -1,8 +1,14 @@
 package com.maggen.WiMouseServer;
 
 import java.awt.AWTException;
+import java.awt.Dimension;
+import java.awt.Toolkit;
 
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JLayeredPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
@@ -13,7 +19,12 @@ public class WiMouseServer {
 	private int port;
 	private JTextField portField;
 	private JPanel panel;
-
+	private JLabel backgroundLabel;
+	private JLabel portLabel;
+	private JButton startButton;
+	private JLayeredPane pane;
+	
+	
 	public WiMouseServer()
 	{
 		JFrame frame = new JFrame("WiMouse Server");
@@ -29,13 +40,36 @@ public class WiMouseServer {
 	
 	private void initFileds()
 	{
+		pane = new JLayeredPane();
+		pane.setPreferredSize(new Dimension(400, 400));
+		
+		ImageIcon background = new ImageIcon(Toolkit.getDefaultToolkit().getImage(getClass().getResource("background.png") ) );
+		this.backgroundLabel = new JLabel(background);
+		
 		//Initialize the panel
 		panel = new JPanel();
 		
 		//initialize the text field
-		this.portField = new JTextField(8);
+		this.portField = new JTextField();
+		this.portField.setText("9876");
 		
-		panel.add(portField);
+		//initialize the port label
+		this.portLabel = new JLabel("Port number: ");
+		
+		//Initialize the start button
+		this.startButton = new JButton("Start Server");
+		
+		
+		//50 is the background number
+		pane.add(backgroundLabel, 50);
+		//100 is the portField number, this component is relative to 50 (background)
+		pane.add(portField, 100, 50);
+		pane.add(portLabel, 100, 50);
+		
+		this.panel.add(pane);
+		this.backgroundLabel.setBounds(0, 0, background.getIconWidth(), background.getIconHeight());
+		this.portField.setBounds(295, 330, 100, 30);
+		this.portLabel.setBounds(210, 330, 100, 30);
 		
 		//default port
 		port = 9476;
