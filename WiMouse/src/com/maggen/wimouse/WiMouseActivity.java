@@ -154,7 +154,11 @@ public class WiMouseActivity extends Activity {
 			Log.d("Update", ""+ipHistory);
 			if(ipHistory < historyMax )
 			{
-				editor.putString("ip"+ipHistory, ip);
+				for(int i = 0 ; i < ipHistory; i++)
+				{
+					editor.putString("ip"+(i+1), this.pref.getString("ip"+i, "-1"));
+				}
+				editor.putString("ip0", ip);
 				editor.putInt("ipHistory", ++ipHistory);
 				editor.apply();
 				return;
