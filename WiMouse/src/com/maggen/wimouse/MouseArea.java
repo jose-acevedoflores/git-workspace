@@ -29,6 +29,18 @@ public class MouseArea extends Activity implements OnTouchListener{
 	private UDPClient client;
 	private float previousX;
 	private float previousY;
+	
+	//rectangle constants
+	private float rightClickLeft;
+	private float rightClickTop;
+	private float rightClickRight;
+	private float rightClickBottom;
+	
+	private float leftClickLeft;
+	private float leftClickTop;
+	private float leftClickRight;
+	private float leftClickBottom;
+
 
 	public void onCreate(Bundle savedInstanceSate)
 	{
@@ -102,7 +114,7 @@ public class MouseArea extends Activity implements OnTouchListener{
 		switch(event.getAction())
 		{
 		case MotionEvent.ACTION_DOWN:
-
+			//if( x > )
 			break;
 		case MotionEvent.ACTION_UP:
 			this.previousX = 0;
@@ -156,27 +168,46 @@ public class MouseArea extends Activity implements OnTouchListener{
 
 		public void onDraw(Canvas c)
 		{	
+			initializeRectangleCoordinates(c);
+			
 			Paint p = new Paint();
 			p.setColor(Color.RED);
-			float width = c.getWidth();
-			float height = c.getHeight();
+		
+			//Draw left click
+			c.drawRect(leftClickLeft, leftClickTop , leftClickRight, leftClickBottom, p);
 
-			//Change the value for the top of the rectangle.
-			double dummy = height - height/4.2;
-			float top=Float.parseFloat(String.valueOf(dummy));
+			//Draw right click
+			c.drawRect(rightClickLeft , rightClickTop , rightClickRight, rightClickBottom, p);
 
-			//Change the value for the right side of the rectangle
-			dummy = width/2.4;
-			float right = Float.parseFloat(String.valueOf(dummy));
+		}
+		
+		private void initializeRectangleCoordinates(Canvas c)
+		{
+			float canvasHeight = c.getHeight();
+			float canvasWidth = c.getWidth();	
+			double dummy;
 
-			c.drawRect(0, top , right, height, p);
+			/*-----------Left click rectangle coordinates ------------*/
+			leftClickLeft = 0;
+			
+			dummy = canvasHeight - canvasHeight/4.2;
+			leftClickTop = Float.parseFloat(String.valueOf(dummy));
+			
+			dummy = canvasWidth/2.4;
+			leftClickRight = Float.parseFloat(String.valueOf(dummy));
+			
+			leftClickBottom = canvasHeight;
+			
+			/*-----------Right click rectangle coordinates ------------*/
 
-			//Change the value for the left side of the rectangle.
-			dummy = width - width/2.4; 
-			float left = Float.parseFloat(String.valueOf(dummy));
-
-			c.drawRect(left , top , width, height, p);
-
+			dummy = canvasWidth - canvasWidth/2.4; 
+			rightClickLeft = Float.parseFloat(String.valueOf(dummy));
+			
+			rightClickTop = leftClickTop;
+			
+			rightClickRight = canvasWidth;
+			
+			rightClickBottom = leftClickBottom;
 		}
 	}
 	/*-------------------------Private class -------------------------------------*/
