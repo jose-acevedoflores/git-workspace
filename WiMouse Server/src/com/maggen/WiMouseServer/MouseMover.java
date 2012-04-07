@@ -5,6 +5,7 @@ import java.awt.MouseInfo;
 import java.awt.Point;
 import java.awt.PointerInfo;
 import java.awt.Robot;
+import java.awt.event.InputEvent;
 
 
 /**
@@ -32,7 +33,7 @@ public class MouseMover {
 	private int newY;
 
 	private String[] split;
-	
+
 	public MouseMover() throws AWTException
 	{
 		this.robot = new Robot();
@@ -48,22 +49,32 @@ public class MouseMover {
 		this.inf  = MouseInfo.getPointerInfo();
 		pointerLocation = inf.getLocation();
 
-		split = movement.split(",");
+		if(movement.trim().equals("left"))
+		{
+			System.out.println("Left");
+			robot.mousePress(InputEvent.BUTTON1_MASK);
+		}
+		else if (movement.trim().equals("right"))
+		{
+			System.out.println("right");
+		}
+		else{
+			split = movement.split(",");
 
-		xFromAndroid = Integer.parseInt(split[0].trim()) ;
-		yFromAndroid = Integer.parseInt(split[1].trim()) ;
-		prevX = Integer.parseInt(split[2].trim());
-		prevY = Integer.parseInt(split[3].trim());
+			xFromAndroid = Integer.parseInt(split[0].trim()) ;
+			yFromAndroid = Integer.parseInt(split[1].trim()) ;
+			prevX = Integer.parseInt(split[2].trim());
+			prevY = Integer.parseInt(split[3].trim());
 
-		pointerX = (int) pointerLocation.getX();
-		pointerY = (int) pointerLocation.getY();
+			pointerX = (int) pointerLocation.getX();
+			pointerY = (int) pointerLocation.getY();
 
-	//	System.out.println("X: "+xFromAndroid +", Y: "+yFromAndroid+" PrevX: "+prevX+" PrevY: "+prevY);
-		
-		newX = xFromAndroid-prevX;
-		newY = yFromAndroid-prevY;
-		robot.mouseMove(pointerX+newX,pointerY+newY);
+			//	System.out.println("X: "+xFromAndroid +", Y: "+yFromAndroid+" PrevX: "+prevX+" PrevY: "+prevY);
 
+			newX = xFromAndroid-prevX;
+			newY = yFromAndroid-prevY;
+			robot.mouseMove(pointerX+newX,pointerY+newY);
+		}
 	}
 
 }

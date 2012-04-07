@@ -16,6 +16,7 @@ import android.graphics.Paint;
 import android.os.Bundle;
 import android.os.Handler;
 import android.preference.PreferenceManager;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.SurfaceView;
 import android.view.View;
@@ -110,22 +111,33 @@ public class MouseArea extends Activity implements OnTouchListener{
 
 		float x = event.getX();
 		float y = event.getY();
-
-		switch(event.getAction())
-		{
-		case MotionEvent.ACTION_DOWN:
-			//if( x > )
-			break;
-		case MotionEvent.ACTION_UP:
-			this.previousX = 0;
-			this.previousY = 0;
-			return true;
-		default:
-			break;
-		}
-
-
+	
 		try{
+			
+			switch(event.getAction())
+			{
+			case MotionEvent.ACTION_DOWN:
+				if( y > leftClickTop && x < leftClickRight)
+				{
+					Log.d("Left", "Click");
+					client.leftClick();
+				}
+				
+				if( y > rightClickTop && x > rightClickLeft)
+				{
+					Log.d("Right", "Click");
+					client.rightClick();
+				}
+				break;
+			case MotionEvent.ACTION_UP:
+				this.previousX = 0;
+				this.previousY = 0;
+				return true;
+			default:
+				break;
+			}
+
+			
 			if(this.previousX != 0 && this.previousY != 0)
 				client.updatePointer((int) x,(int) y, (int) this.previousX, (int) this.previousY);
 
@@ -178,8 +190,8 @@ public class MouseArea extends Activity implements OnTouchListener{
 
 			//Draw right click
 			c.drawRect(rightClickLeft , rightClickTop , rightClickRight, rightClickBottom, p);
-
 		}
+		
 		
 		private void initializeRectangleCoordinates(Canvas c)
 		{

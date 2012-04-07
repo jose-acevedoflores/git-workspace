@@ -18,7 +18,7 @@ public class UDPClient {
 
 	public UDPClient(String ip, SharedPreferences prefs) throws SocketException, UnknownHostException
 	{
-		
+
 		String port = prefs.getString("port", "9876");
 		//default port 9876
 		try{
@@ -27,7 +27,7 @@ public class UDPClient {
 		catch (NumberFormatException e) {
 			portI = 9876;
 		}
-		
+
 		socket = new DatagramSocket();
 		address = InetAddress.getByName(ip);
 		Log.d("UDP", "creation");
@@ -47,5 +47,26 @@ public class UDPClient {
 
 	}
 
+	public void leftClick() throws IOException
+	{
+		byte[] data = new byte[10];
+		String str = "left";
+
+		data = str.getBytes();
+
+		DatagramPacket packet = new DatagramPacket(data, data.length, address, portI);
+		socket.send(packet);
+	}
+
+	public void rightClick() throws IOException
+	{
+		byte[] data = new byte[10];
+		String str = "right";
+
+		data = str.getBytes();
+
+		DatagramPacket packet = new DatagramPacket(data, data.length, address, portI);
+		socket.send(packet);
+	}
 
 }
