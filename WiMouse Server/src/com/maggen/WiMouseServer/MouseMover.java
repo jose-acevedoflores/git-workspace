@@ -53,10 +53,13 @@ public class MouseMover {
 		{
 			System.out.println("Left");
 			robot.mousePress(InputEvent.BUTTON1_MASK);
+			robot.mouseRelease(InputEvent.BUTTON1_MASK);
 		}
 		else if (movement.trim().equals("right"))
 		{
 			System.out.println("right");
+			robot.mousePress(InputEvent.BUTTON3_MASK);
+			robot.mouseRelease(InputEvent.BUTTON3_MASK);
 		}
 		else{
 			split = movement.split(",");
