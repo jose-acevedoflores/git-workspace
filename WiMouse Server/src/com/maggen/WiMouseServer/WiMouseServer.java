@@ -5,6 +5,8 @@ import java.awt.Dimension;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.net.InetAddress;
+import java.net.UnknownHostException;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -23,6 +25,7 @@ public class WiMouseServer {
 	private JPanel panel;
 	private JLabel backgroundLabel;
 	private JLabel portLabel;
+	private JLabel ipLabel;
 	private JButton startButton;
 	private JLayeredPane pane;
 	
@@ -63,7 +66,14 @@ public class WiMouseServer {
 		this.portLabel = new JLabel("Port number: ");
 		
 		//Initialize the start button
-		this.startButton = new JButton("Start Server");
+		this.startButton = new JButton("Restart Server");
+		
+		//Initialize the ip label.
+		try {
+			this.ipLabel = new JLabel("Getting started with WiMouse:  Type "+InetAddress.getLocalHost().getHostAddress());
+		} catch (UnknownHostException e) {
+			this.ipLabel = new JLabel("Unknown Host");
+		}
 		
 		
 		//50 is the background number
@@ -72,12 +82,14 @@ public class WiMouseServer {
 		pane.add(portField, 100, 50);
 		pane.add(portLabel, 100, 50);
 		pane.add(startButton, 100, 50);
+		pane.add(ipLabel,100,50);
 		
 		this.panel.add(pane);
 		this.backgroundLabel.setBounds(0, 0, background.getIconWidth(), background.getIconHeight());
 		this.portField.setBounds(295, 330, 100, 30);
 		this.portLabel.setBounds(210, 330, 100, 30);
 		this.startButton.setBounds(150, 100, 100, 50);
+		this.ipLabel.setBounds(10, 100, 300, 200);
 		
 		this.startButton.addActionListener(new StartButtonListener());
 		
