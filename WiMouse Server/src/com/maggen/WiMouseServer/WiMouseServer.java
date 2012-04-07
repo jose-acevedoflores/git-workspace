@@ -35,6 +35,10 @@ public class WiMouseServer {
 		frame.setSize(400,400);
 		frame.setLocationRelativeTo(null);
 		
+		//Code to set the icon in windows
+		ImageIcon icon = new ImageIcon(Toolkit.getDefaultToolkit().getImage(getClass().getResource("icon.png") ) );
+		frame.setIconImage(icon.getImage());
+		
 		this.initFileds();
 		frame.add(panel);
 		frame.setVisible(true);
