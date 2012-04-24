@@ -129,7 +129,7 @@ public class WiMouseICSActivity extends Activity {
 
 		case R.id.settings:
 			Intent settings = new Intent("com.maggen.wimouse.menu.SETTINGS");
-			startActivity(settings);
+			startActivity(settings);		
 			break;
 
 		case R.id.exit:

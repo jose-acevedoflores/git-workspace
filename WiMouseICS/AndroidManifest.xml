@@ -5,19 +5,51 @@
     android:versionName="1.0" >
 
     <uses-sdk android:minSdkVersion="15" />
-
-    <application
-        android:icon="@drawable/ic_launcher"
+    <uses-permission android:name="android.permission.INTERNET" />
+    
+   <application
+        android:icon="@drawable/r2d2"
         android:label="@string/app_name" >
         <activity
             android:name=".WiMouseICSActivity"
-            android:label="@string/app_name" >
+            android:label="@string/app_name"
+            android:screenOrientation="portrait" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".MouseArea"
+            android:label="@string/app_name"
+            android:screenOrientation="landscape" >
+            <intent-filter>
+                <action android:name="android.intent.action.MOUSEAREA" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".menu.About"
+            android:label="@string/app_name"
+            android:theme="@android:style/Theme.Dialog" >
+            <intent-filter>
+                <action android:name="com.maggen.wimouse.menu.ABOUT" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".menu.Settings"
+            android:label="@string/app_name" >
+            <intent-filter>
+                <action android:name="com.maggen.wimouse.menu.SETTINGS" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
     </application>
+
 
 </manifest>

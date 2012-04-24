@@ -40,9 +40,11 @@ public final class R {
         public static final int buttonText=0x7f050003;
         public static final int etNewIP=0x7f050002;
         public static final int menu=0x7f050000;
+        public static final int pref=0x7f050006;
         public static final int settings=0x7f050005;
     }
     public static final class xml {
-        public static final int settings=0x7f040000;
+        public static final int preference_headers=0x7f040000;
+        public static final int settings=0x7f040001;
     }
 }
