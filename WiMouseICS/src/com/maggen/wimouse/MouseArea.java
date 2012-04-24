@@ -115,8 +115,6 @@ public class MouseArea extends Activity implements OnTouchListener{
 		currentX = event.getX();
 		currentY = event.getY();
 
-
-
 		switch(event.getAction())
 		{
 		case MotionEvent.ACTION_DOWN:
@@ -132,8 +130,8 @@ public class MouseArea extends Activity implements OnTouchListener{
 						}
 					}
 				}).start();
-				
-				
+
+
 			}
 
 			if( currentY > rightClickTop && currentX > rightClickLeft)
@@ -161,17 +159,21 @@ public class MouseArea extends Activity implements OnTouchListener{
 
 
 		if(this.previousX != 0 && this.previousY != 0)
-//			new Thread(new Runnable(){
-//				public void run(){
-//					try {
-//						client.updatePointer((int) currentX,(int) currentY, (int) previousX, (int) previousY);
-//					} catch (IOException e) {
-//						e.printStackTrace();
-//					}
-//				}
-//			}).start();
-			(new Asyn()).execute(client);
-		
+		{
+			(new Asyn(currentX, currentY, previousX, previousY)).execute(client);
+
+		}
+		//			new Thread(new Runnable(){
+		//				public void run(){
+		//					try {
+		//						client.updatePointer((int) currentX,(int) currentY, (int) previousX, (int) previousY);
+		//					} catch (IOException e) {
+		//						e.printStackTrace();
+		//					}
+		//				}
+		//			}).start();
+
+
 
 		this.previousX = currentX;
 		this.previousY = currentY;
@@ -257,18 +259,26 @@ public class MouseArea extends Activity implements OnTouchListener{
 
 	private class Asyn extends AsyncTask<UDPClient, Long, Integer>
 	{
-
+		private int[] coor;
+		public Asyn(float x, float y, float prevX, float prevY)
+		{
+			coor = new int[4];
+			coor[0] =(int) x;
+			coor[1]	=(int) y;
+			coor[2] = (int) prevX;
+			coor[3] =(int) prevY;
+		}
 		@Override
 		protected Integer doInBackground(UDPClient... params) {
 			try {
-				params[0].updatePointer((int) currentX,(int) currentY, (int) previousX, (int) previousY);
+				params[0].updatePointer(coor[0],coor[1], coor[2],coor[3]);
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
-		
+
 			return null;
 		}
-		
+
 	}
 
 	/*-------------------------Private class -------------------------------------*/
