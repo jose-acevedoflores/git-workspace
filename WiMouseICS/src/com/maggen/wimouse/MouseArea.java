@@ -30,13 +30,15 @@ public class MouseArea extends Activity implements OnTouchListener{
 	private UDPClient client;
 	private float previousX;
 	private float previousY;
-	
+	private float currentX;
+	private float currentY;
+
 	//rectangle constants
 	private float rightClickLeft;
 	private float rightClickTop;
 	private float rightClickRight;
 	private float rightClickBottom;
-	
+
 	private float leftClickLeft;
 	private float leftClickTop;
 	private float leftClickRight;
@@ -109,60 +111,88 @@ public class MouseArea extends Activity implements OnTouchListener{
 	@Override
 	public boolean onTouch(View v, MotionEvent event) {
 
-		float x = event.getX();
-		float y = event.getY();
-	
-		try{
-			
-			switch(event.getAction())
+		currentX = event.getX();
+		currentY = event.getY();
+
+
+
+		switch(event.getAction())
+		{
+		case MotionEvent.ACTION_DOWN:
+			if( currentY > leftClickTop && currentX < leftClickRight)
 			{
-			case MotionEvent.ACTION_DOWN:
-				if( y > leftClickTop && x < leftClickRight)
-				{
-					Log.d("Left", "Click");
-					client.leftClick();
-				}
+				Log.d("Left", "Click");
+				new Thread(new Runnable(){
+					public void run(){
+						try {
+							client.leftClick();
+						} catch (IOException e) {
+							e.printStackTrace();
+						}
+					}
+				}).start();
 				
-				if( y > rightClickTop && x > rightClickLeft)
-				{
-					Log.d("Right", "Click");
-					client.rightClick();
-				}
-				break;
-			case MotionEvent.ACTION_UP:
-				this.previousX = 0;
-				this.previousY = 0;
-				return true;
-			default:
-				break;
+				
 			}
 
-			
-			if(this.previousX != 0 && this.previousY != 0)
-				client.updatePointer((int) x,(int) y, (int) this.previousX, (int) this.previousY);
+			if( currentY > rightClickTop && currentX > rightClickLeft)
+			{
+				Log.d("Right", "Click");	
+				new Thread(new Runnable(){
+					public void run(){
+						try {
+							client.rightClick();
+						} catch (IOException e) {
 
-			this.previousX = x;
-			this.previousY = y;
-
+							e.printStackTrace();
+						}
+					}
+				}).start();
+			}
+			break;
+		case MotionEvent.ACTION_UP:
+			this.previousX = 0;
+			this.previousY = 0;
+			return true;
+		default:
+			break;
 		}
-		catch (IOException e) {
 
-			AlertDialog.Builder dia = new AlertDialog.Builder(this);
-			dia.setMessage("Could not send coordinates");
-			final AlertDialog alert = dia.create();
-			alert.setTitle("Alert");
-			alert.show();
 
-			Handler handler = new Handler();
-			handler.postDelayed(new Runnable() {
-				public void run() {
-					if(alert.isShowing())
-						alert.dismiss();
+		if(this.previousX != 0 && this.previousY != 0)
+			new Thread(new Runnable(){
+				public void run(){
+					try {
+						client.updatePointer((int) currentX,(int) currentY, (int) previousX, (int) previousY);
+					} catch (IOException e) {
+						e.printStackTrace();
+					}
 				}
-			}, 6000);
+			}).start();
 
 
-		}
+		this.previousX = currentX;
+		this.previousY = currentY;
+
+
+		//		catch (IOException e) {
+		//
+		//			AlertDialog.Builder dia = new AlertDialog.Builder(this);
+		//			dia.setMessage("Could not send coordinates");
+		//			final AlertDialog alert = dia.create();
+		//			alert.setTitle("Alert");
+		//			alert.show();
+		//
+		//			Handler handler = new Handler();
+		//			handler.postDelayed(new Runnable() {
+		//				public void run() {
+		//					if(alert.isShowing())
+		//						alert.dismiss();
+		//				}
+		//			}, 6000);
+		//
+		//
+		//		}
 
 		return true;
 	}
@@ -181,18 +211,18 @@ public class MouseArea extends Activity implements OnTouchListener{
 		public void onDraw(Canvas c)
 		{	
 			initializeRectangleCoordinates(c);
-			
+
 			Paint p = new Paint();
 			p.setColor(Color.RED);
-		
+
 			//Draw left click
 			c.drawRect(leftClickLeft, leftClickTop , leftClickRight, leftClickBottom, p);
 
 			//Draw right click
 			c.drawRect(rightClickLeft , rightClickTop , rightClickRight, rightClickBottom, p);
 		}
-		
-		
+
+
 		private void initializeRectangleCoordinates(Canvas c)
 		{
 			float canvasHeight = c.getHeight();
@@ -201,27 +231,29 @@ public class MouseArea extends Activity implements OnTouchListener{
 
 			/*-----------Left click rectangle coordinates ------------*/
 			leftClickLeft = 0;
-			
+
 			dummy = canvasHeight - canvasHeight/4.2;
 			leftClickTop = Float.parseFloat(String.valueOf(dummy));
-			
+
 			dummy = canvasWidth/2.4;
 			leftClickRight = Float.parseFloat(String.valueOf(dummy));
-			
+
 			leftClickBottom = canvasHeight;
-			
+
 			/*-----------Right click rectangle coordinates ------------*/
 
 			dummy = canvasWidth - canvasWidth/2.4; 
 			rightClickLeft = Float.parseFloat(String.valueOf(dummy));
-			
+
 			rightClickTop = leftClickTop;
-			
+
 			rightClickRight = canvasWidth;
-			
+
 			rightClickBottom = leftClickBottom;
 		}
 	}
+
+
 	/*-------------------------Private class -------------------------------------*/
 
 }
