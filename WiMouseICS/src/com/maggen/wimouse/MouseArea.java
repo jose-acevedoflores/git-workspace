@@ -13,6 +13,7 @@ import android.content.SharedPreferences;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.preference.PreferenceManager;
@@ -160,16 +161,17 @@ public class MouseArea extends Activity implements OnTouchListener{
 
 
 		if(this.previousX != 0 && this.previousY != 0)
-			new Thread(new Runnable(){
-				public void run(){
-					try {
-						client.updatePointer((int) currentX,(int) currentY, (int) previousX, (int) previousY);
-					} catch (IOException e) {
-						e.printStackTrace();
-					}
-				}
-			}).start();
-
+//			new Thread(new Runnable(){
+//				public void run(){
+//					try {
+//						client.updatePointer((int) currentX,(int) currentY, (int) previousX, (int) previousY);
+//					} catch (IOException e) {
+//						e.printStackTrace();
+//					}
+//				}
+//			}).start();
+			(new Asyn()).execute(client);
+		
 
 		this.previousX = currentX;
 		this.previousY = currentY;
@@ -253,6 +255,21 @@ public class MouseArea extends Activity implements OnTouchListener{
 		}
 	}
 
+	private class Asyn extends AsyncTask<UDPClient, Long, Integer>
+	{
+
+		@Override
+		protected Integer doInBackground(UDPClient... params) {
+			try {
+				params[0].updatePointer((int) currentX,(int) currentY, (int) previousX, (int) previousY);
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		
+			return null;
+		}
+		
+	}
 
 	/*-------------------------Private class -------------------------------------*/
 

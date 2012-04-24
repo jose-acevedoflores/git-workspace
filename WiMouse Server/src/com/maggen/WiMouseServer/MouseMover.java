@@ -72,7 +72,7 @@ public class MouseMover {
 			pointerX = (int) pointerLocation.getX();
 			pointerY = (int) pointerLocation.getY();
 
-			//	System.out.println("X: "+xFromAndroid +", Y: "+yFromAndroid+" PrevX: "+prevX+" PrevY: "+prevY);
+			System.out.println("X: "+xFromAndroid +", Y: "+yFromAndroid+" PrevX: "+prevX+" PrevY: "+prevY);
 
 			newX = xFromAndroid-prevX;
 			newY = yFromAndroid-prevY;
