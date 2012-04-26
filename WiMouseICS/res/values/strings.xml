@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="menu">Select or type the IP from the server</string>
+    <string name="app_name">WiMouseICS</string>
+    <string name="etNewIP">IP</string>
+    <string name="buttonText">Start</string>
+    <string name="about">This is my app xD</string>
+    <string name="settings">Port number</string>
+    <string name="pref">Preferences</string>
+
+</resources>
