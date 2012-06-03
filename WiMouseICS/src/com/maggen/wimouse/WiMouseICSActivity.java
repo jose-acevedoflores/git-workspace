@@ -1,6 +1,8 @@
 package com.maggen.wimouse;
 
 
+
+
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Intent;
@@ -129,7 +131,7 @@ public class WiMouseICSActivity extends Activity {
 
 		case R.id.settings:
 			Intent settings = new Intent("com.maggen.wimouse.menu.SETTINGS");
-			startActivity(settings);		
+			startActivity(settings);
 			break;
 
 		case R.id.exit:

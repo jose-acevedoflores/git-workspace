@@ -33,7 +33,7 @@ public class WiMouseServer {
 	public WiMouseServer()
 	{
 		JFrame frame = new JFrame("WiMouse Server");
-		frame.setResizable(false);
+		//frame.setResizable(false);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setSize(400,400);
 		frame.setLocationRelativeTo(null);
@@ -89,7 +89,7 @@ public class WiMouseServer {
 		this.portField.setBounds(295, 330, 100, 30);
 		this.portLabel.setBounds(210, 330, 100, 30);
 		this.startButton.setBounds(150, 100, 100, 50);
-		this.ipLabel.setBounds(10, 100, 300, 200);
+		this.ipLabel.setBounds(10, 100, 400, 200);
 		
 		this.startButton.addActionListener(new StartButtonListener());
 		
