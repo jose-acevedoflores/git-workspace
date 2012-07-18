@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android" >
+    
+    
+    <PreferenceCategory android:title="Dot Duration" >
+        <EditTextPreference
+            android:defaultValue="200"
+            android:dialogTitle="Enter dot duration "
+            android:key="dot_duration_preference"
+            android:summary="Duration of the dot&apos;s on period"
+            android:title="Dot duration in ms" />
+    </PreferenceCategory>
+    <PreferenceCategory android:title="Dependency" >
+        <CheckBoxPreference
+            android:key="parent_checkbox_preference"
+            android:summary="This describes what the checkbox does"
+            android:title="Something" />
+
+        <!-- The visual style of a child is defined by this styled theme attribute. -->
+        <CheckBoxPreference
+            android:dependency="parent_checkbox_preference"
+            android:key="child_checkbox_preference"
+            android:layout="?android:attr/preferenceLayoutChild"
+            android:summary="This describes the child"
+            android:title="I&apos;m the child of Something" />
+    </PreferenceCategory>
+    
+
+</PreferenceScreen>

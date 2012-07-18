@@ -1,0 +1,12 @@
+<resources>
+
+    <string name="app_name">MorseCode LED</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="menu_settings">Settings</string>
+    <string name="title_activity_main">MorseCode LED</string>
+    <string name="tab1TV">Translate to Morse code </string>
+    <string name="etTab1Hint">Type word to translate</string>
+    <string name="morseButton">Flash Led</string>
+	<string name="ivContent">Morse Code Alphabet</string>
+    	
+</resources>
