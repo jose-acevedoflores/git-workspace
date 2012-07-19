@@ -8,6 +8,13 @@ package euclideanalgo.util;
  */
 public class GreatestCommonDivisor {
 	
+	
+	/**
+	 * 
+	 * @param a
+	 * @param b
+	 * @return
+	 */
 	public static int gcd(long a, long b)
 	{
 		long r1 = Math.max(a, b);
@@ -25,6 +32,15 @@ public class GreatestCommonDivisor {
 		
 	}
 	
+	/**
+	 * This method takes the two parameters it receives and computes
+	 * the greatest common divisor. It also computes the numbers 
+	 * s and t such that s*a + b*t = gcd(a,b) 
+	 * @param a the first number
+	 * @param b the second number
+	 * @return the gcd value (index: 0), the s value (index: 1), the t 
+	 * value (index 2). 
+	 */
 	public static int[] extendedGcd(long a, long b)
 	{
 		long r1 = Math.max(a, b);
