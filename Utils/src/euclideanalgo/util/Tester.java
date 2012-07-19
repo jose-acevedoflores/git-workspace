@@ -12,10 +12,10 @@ public class Tester {
 
 		System.out.println("Testing extended algorithm");
 
-		int res[] = GreatestCommonDivisor.extendedGcd(161, 28);
+		int res[] = GreatestCommonDivisor.extendedGcd(3, 2);
 		System.out.println(res[0]);
-		System.out.println(res[1]);
-		System.out.println(res[2]);
+		System.out.println("s = "+res[1]);
+		System.out.println("t = "+res[2]);
 
 	}
 
