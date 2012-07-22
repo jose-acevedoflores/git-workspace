@@ -8,7 +8,7 @@ public class Tester {
 	public static void main(String[] args) {
 
 
-		System.out.println("GCD: "+GreatestCommonDivisor.gcd(10, 8));
+		System.out.println("GCD: "+GreatestCommonDivisor.gcd(2,11));
 
 		System.out.println("Testing extended algorithm");
 
@@ -16,6 +16,8 @@ public class Tester {
 		System.out.println(res[0]);
 		System.out.println("s = "+res[1]);
 		System.out.println("t = "+res[2]);
+		
+		System.out.println("Mult inverse: "+GreatestCommonDivisor.multiplicativeInverse(23, 100));
 
 	}
 

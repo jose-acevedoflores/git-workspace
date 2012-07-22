@@ -72,4 +72,34 @@ public class GreatestCommonDivisor {
 		
 	}
 	
+	public static int multiplicativeInverse(int b, int n)
+	{
+		if(gcd(26,11) != 1)
+			return 0;
+		
+		long r1 = n;
+		long r2 = b;
+		long div=0;
+		long t1=0, t2 =1;
+		long t =0;
+		long r =0;
+		
+		while(r2>0)
+		{
+			div =  (r1/r2);
+			
+			r = (r1%r2);
+			r1 = r2;
+			r2 = r;
+			
+			t = t1 - div*t2;
+			t1 = t2;
+			t2 = t;
+		}		
+		
+		if(r1 == 1)
+			return (int)t1; 
+		
+		return 0;
+	}
 }
