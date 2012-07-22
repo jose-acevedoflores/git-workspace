@@ -19,6 +19,8 @@ public class Tester {
 		
 		System.out.println("Mult inverse: "+GreatestCommonDivisor.multiplicativeInverse(23, 100));
 
+		//Figure 2.26 
+		System.out.println((3*15+5*23+7*15+2*24)%26);
 	}
 
 }
