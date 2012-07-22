@@ -8,7 +8,7 @@ public class Tester {
 	public static void main(String[] args) {
 
 
-		System.out.println(GreatestCommonDivisor.gcd(2740, 1760));
+		System.out.println("GCD: "+GreatestCommonDivisor.gcd(10, 8));
 
 		System.out.println("Testing extended algorithm");
 
