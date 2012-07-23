@@ -109,7 +109,7 @@ public class MainActivity extends Activity implements OnClickListener{
 
 			String inMorse = this.morse.flashLed(this.camera, this.params, dotDuration );
 			
-			this.wordInMorse.setText(this.etTab1.getText()+" = "+inMorse);
+			this.writeTextView(inMorse);
 			
 			Toast t = Toast.makeText(this, "Flashing ", Toast.LENGTH_LONG);
 			t.show();
@@ -163,5 +163,10 @@ public class MainActivity extends Activity implements OnClickListener{
 		this.params = this.camera.getParameters();
 
 	}
+    
+    private void writeTextView(String inMorse)
+    {
+    	this.wordInMorse.setText(this.etTab1.getText()+" = "+inMorse);	
+    }
     
 }
