@@ -17,6 +17,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TabHost;
 import android.widget.TabHost.TabSpec;
+import android.widget.TextView;
 import android.widget.Toast;
 
 public class MainActivity extends Activity implements OnClickListener{
@@ -36,7 +37,8 @@ public class MainActivity extends Activity implements OnClickListener{
 	private Camera camera;
 	private Parameters params;
 
-	
+	//Text view for current word
+	private TextView wordInMorse;
 	
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -106,8 +108,12 @@ public class MainActivity extends Activity implements OnClickListener{
 			}
 
 			String inMorse = this.morse.flashLed(this.camera, this.params, dotDuration );
-			Toast t = Toast.makeText(this, "Morse Translation = "+inMorse, Toast.LENGTH_LONG);
+			
+			this.wordInMorse.setText(this.etTab1.getText()+" = "+inMorse);
+			
+			Toast t = Toast.makeText(this, "Flashing ", Toast.LENGTH_LONG);
 			t.show();
+			
 			break;
 
 		}//End of switch
@@ -149,6 +155,10 @@ public class MainActivity extends Activity implements OnClickListener{
 		this.etTab1 = (EditText) findViewById(R.id.etTab1);
 		this.morse = new Morse(etTab1);
 
+		//TextView setup
+		this.wordInMorse = (TextView) findViewById(R.id.tvTab1el2);
+		
+		//Camera setup
 		this.camera = Camera.open();
 		this.params = this.camera.getParameters();
 
