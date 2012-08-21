@@ -142,10 +142,11 @@ public class FTPMain extends JFrame implements ActionListener{
 			if(transferable.isDataFlavorSupported(nixDataFlavor))
 			{
 				String path = null;
-				System.out.println(path);
 				try
 				{
 					path = transferable.getTransferData(nixDataFlavor).toString();
+
+					System.out.println("path = "+path);
 
 				} catch (UnsupportedFlavorException e) {
 					e.printStackTrace();
