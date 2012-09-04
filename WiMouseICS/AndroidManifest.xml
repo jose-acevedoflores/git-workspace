@@ -4,10 +4,13 @@
     android:versionCode="1"
     android:versionName="1.0" >
 
-    <uses-sdk android:minSdkVersion="15" />
+    <uses-sdk
+        android:minSdkVersion="14"
+        android:targetSdkVersion="15" />
+
     <uses-permission android:name="android.permission.INTERNET" />
-    
-   <application
+
+    <application
         android:icon="@drawable/r2d2"
         android:label="@string/app_name" >
         <activity
@@ -22,6 +25,7 @@
         </activity>
         <activity
             android:name=".MouseArea"
+            android:exported="false"
             android:label="@string/app_name"
             android:screenOrientation="landscape" >
             <intent-filter>
@@ -32,6 +36,7 @@
         </activity>
         <activity
             android:name=".menu.About"
+            android:exported="false"
             android:label="@string/app_name"
             android:theme="@android:style/Theme.Dialog" >
             <intent-filter>
@@ -42,6 +47,7 @@
         </activity>
         <activity
             android:name=".menu.Settings"
+            android:exported="false"
             android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="com.maggen.wimouse.menu.SETTINGS" />
@@ -50,6 +56,5 @@
             </intent-filter>
         </activity>
     </application>
-
 
 </manifest>
