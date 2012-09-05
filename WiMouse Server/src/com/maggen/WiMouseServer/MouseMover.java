@@ -67,15 +67,13 @@ public class MouseMover {
 		else if(movement.split("[.]")[0].equals("scroll"))
 		{
 			if(movement.split("[.]")[1].equals("up"))
-			{
-				robot.keyPress(KeyEvent.VK_PAGE_UP);
-				robot.keyRelease(KeyEvent.VK_PAGE_UP);
-			}
-			else
-			{
-				robot.keyPress(KeyEvent.VK_PAGE_DOWN);
-				robot.keyRelease(KeyEvent.VK_PAGE_DOWN);
-			}
+				//Negative goes up
+				robot.mouseWheel(-1);
+			
+			else	
+				//Positive goes down
+				robot.mouseWheel(1);
+			
 		}
 		else{
 			split = movement.split(",");
