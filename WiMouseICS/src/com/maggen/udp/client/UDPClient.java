@@ -68,5 +68,22 @@ public class UDPClient {
 		DatagramPacket packet = new DatagramPacket(data, data.length, address, portI);
 		socket.send(packet);
 	}
+	
+	/**
+	 * 
+	 * @param upOrDown true if it's up, false if it's down
+	 */
+	public void scroll(boolean upOrDown) throws IOException
+	{
+		byte[] data = new byte[20];
+		if (upOrDown)
+			data = "scroll.up".getBytes();
+		else
+			data = "scroll.down".getBytes();
+		
+		DatagramPacket packet = new DatagramPacket(data, data.length, address, portI);
+		socket.send(packet);
+		
+	}
 
 }

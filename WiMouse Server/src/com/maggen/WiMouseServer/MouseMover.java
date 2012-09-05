@@ -6,6 +6,7 @@ import java.awt.Point;
 import java.awt.PointerInfo;
 import java.awt.Robot;
 import java.awt.event.InputEvent;
+import java.awt.event.KeyEvent;
 
 
 /**
@@ -60,6 +61,21 @@ public class MouseMover {
 			System.out.println("right");
 			robot.mousePress(InputEvent.BUTTON3_MASK);
 			robot.mouseRelease(InputEvent.BUTTON3_MASK);
+		}
+		//The movement object comes in this format scroll.up or scroll.down
+		//We take scroll which is the element [0] when we split the movement object
+		else if(movement.split("[.]")[0].equals("scroll"))
+		{
+			if(movement.split("[.]")[1].equals("up"))
+			{
+				robot.keyPress(KeyEvent.VK_PAGE_UP);
+				robot.keyRelease(KeyEvent.VK_PAGE_UP);
+			}
+			else
+			{
+				robot.keyPress(KeyEvent.VK_PAGE_DOWN);
+				robot.keyRelease(KeyEvent.VK_PAGE_DOWN);
+			}
 		}
 		else{
 			split = movement.split(",");

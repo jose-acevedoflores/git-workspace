@@ -122,9 +122,21 @@ public class MouseArea extends Activity implements OnTouchListener{
 		{
 		
 		case MotionEvent.ACTION_POINTER_DOWN:
-			Toast t = Toast.makeText(this, "Two Fingers", Toast.LENGTH_LONG);
-			t.show();
-			Log.d("MIERDAAA", "MIERD");
+			Log.d("Two Fingers", "Click");
+			
+			//means up
+			final boolean upOrDown=  true;
+			
+			new Thread(new Runnable(){
+				public void run(){
+					try {
+						client.scroll(upOrDown);
+					} catch (IOException e) {
+						e.printStackTrace();
+					}
+				}
+			}).start();
+			
 			break;
 		case MotionEvent.ACTION_DOWN:
 			if( currentY > leftClickTop && currentX < leftClickRight)
