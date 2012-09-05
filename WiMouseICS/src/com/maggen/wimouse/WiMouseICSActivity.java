@@ -36,7 +36,7 @@ public class WiMouseICSActivity extends Activity {
 
 
 	public static String ip ="";
-	public static TextView info;
+	public static TextView tvPort;
 
 	/** Called when the activity is first created. */
 	@Override
@@ -103,14 +103,25 @@ public class WiMouseICSActivity extends Activity {
 		String port = pref.getString("port", "9876");
 
 		//Initialize the field to show the port
-		info = (TextView) findViewById(R.id.tvInfo);
-		info.setText(info.getText() +" Port: "+port);
+		tvPort = (TextView) findViewById(R.id.tvPort);
+		tvPort.setText("Port: "+port);
 	}
 
 	public void onPause()
 	{
 		super.onPause();
+		
 	}
+	
+	public void onResume()
+	{
+		super.onResume();
+		String port = pref.getString("port", "9876");
+		tvPort.setText("");//Empty the text view
+		tvPort.setText("Port: "+port);
+	}
+	
+	
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {

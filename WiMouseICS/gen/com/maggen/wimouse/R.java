@@ -20,18 +20,19 @@ public final class R {
         public static final int r2d2=0x7f020001;
     }
     public static final class id {
-        public static final int about=0x7f090009;
-        public static final int bStart=0x7f090006;
-        public static final int etIP1=0x7f090002;
-        public static final int etIP2=0x7f090003;
-        public static final int etIP3=0x7f090004;
-        public static final int etIP4=0x7f090005;
-        public static final int exit=0x7f09000b;
-        public static final int fragments_settings=0x7f090008;
-        public static final int lvPreviousIP=0x7f090007;
-        public static final int settings=0x7f09000a;
+        public static final int about=0x7f09000a;
+        public static final int bStart=0x7f090007;
+        public static final int etIP1=0x7f090003;
+        public static final int etIP2=0x7f090004;
+        public static final int etIP3=0x7f090005;
+        public static final int etIP4=0x7f090006;
+        public static final int exit=0x7f09000c;
+        public static final int fragments_settings=0x7f090009;
+        public static final int lvPreviousIP=0x7f090008;
+        public static final int settings=0x7f09000b;
         public static final int tvAbout=0x7f090000;
         public static final int tvInfo=0x7f090001;
+        public static final int tvPort=0x7f090002;
     }
     public static final class layout {
         public static final int about=0x7f030000;

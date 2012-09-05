@@ -10,9 +10,18 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:gravity="center"
-        android:paddingBottom="20dp"
+        android:paddingBottom="10dp"
         android:paddingTop="25dp"
         android:text="@string/menu"
+        android:textSize="20dp" />
+
+    <TextView
+        android:id="@+id/tvPort"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:paddingBottom="20dp"
         android:textSize="20dp" />
 
     <LinearLayout
