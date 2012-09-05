@@ -167,6 +167,8 @@ public class WiMouseICSActivity extends Activity {
 				//Check if the ip entered is already present in the ListView.
 				for(int i = 0 ; i < ipHistory; i++)
 					 if(this.pref.getString("ip"+i, "-1").equals(ip))
+				//TODO if the element is present and the user clicked on it put 
+				//on top of the list
 						 return;
 				
 				//This loop moves all the previously saved ip's one position forward
@@ -210,6 +212,7 @@ public class WiMouseICSActivity extends Activity {
 			for(int i = 0 ; i < ipFields.length; i++)
 				ip += ipFields[i].getText().toString().trim()+".";
 
+			//Get rid of the . at the end
 			ip = ip.substring(0,ip.length()-1);
 
 			if(this.checkValidIP())

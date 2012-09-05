@@ -24,6 +24,7 @@ import android.view.View;
 import android.view.WindowManager;
 import android.view.View.OnTouchListener;
 import android.view.Window;
+import android.widget.Toast;
 
 public class MouseArea extends Activity implements OnTouchListener{
 
@@ -46,10 +47,12 @@ public class MouseArea extends Activity implements OnTouchListener{
 	private float leftClickBottom;
 
 
+	//TODO Lower light levels
+
 	public void onCreate(Bundle savedInstanceSate)
 	{
 		super.onCreate(savedInstanceSate);
-
+		
 		this.requestWindowFeature(Window.FEATURE_NO_TITLE);
 		getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
@@ -115,8 +118,14 @@ public class MouseArea extends Activity implements OnTouchListener{
 		currentX = event.getX();
 		currentY = event.getY();
 
-		switch(event.getAction())
+		switch(event.getActionMasked())
 		{
+		
+		case MotionEvent.ACTION_POINTER_DOWN:
+			Toast t = Toast.makeText(this, "Two Fingers", Toast.LENGTH_LONG);
+			t.show();
+			Log.d("MIERDAAA", "MIERD");
+			break;
 		case MotionEvent.ACTION_DOWN:
 			if( currentY > leftClickTop && currentX < leftClickRight)
 			{
@@ -153,6 +162,7 @@ public class MouseArea extends Activity implements OnTouchListener{
 			this.previousX = 0;
 			this.previousY = 0;
 			return true;
+		
 		default:
 			break;
 		}
