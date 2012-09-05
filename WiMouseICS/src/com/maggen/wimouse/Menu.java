@@ -7,7 +7,7 @@ public class Menu extends Activity{
 
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		//setContentView(R.layout.)
+		setContentView(R.layout.menus);
 
 	}
 	

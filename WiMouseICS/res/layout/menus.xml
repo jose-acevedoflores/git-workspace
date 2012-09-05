@@ -4,5 +4,10 @@
     android:layout_height="match_parent"
     android:orientation="vertical" >
 
+    <fragment
+        android:id="@+id/fragments_settings"
+        android:name="com.maggen.wimouse.menu.Settings"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent" />
 
 </LinearLayout>
