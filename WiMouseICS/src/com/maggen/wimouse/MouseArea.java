@@ -24,7 +24,6 @@ import android.view.View;
 import android.view.WindowManager;
 import android.view.View.OnTouchListener;
 import android.view.Window;
-import android.widget.Toast;
 
 public class MouseArea extends Activity implements OnTouchListener{
 
@@ -228,17 +227,19 @@ public class MouseArea extends Activity implements OnTouchListener{
 
 	private class Pad extends SurfaceView {
 
+		private Paint p;
 		public Pad(Context context)
 		{
 			super(context);
 			this.setWillNotDraw(false);
+			p = new Paint();
 		}
 
 		public void onDraw(Canvas c)
 		{	
 			initializeRectangleCoordinates(c);
 
-			Paint p = new Paint();
+			//Paint p = new Paint();
 			p.setColor(Color.RED);
 
 			//Draw left click
