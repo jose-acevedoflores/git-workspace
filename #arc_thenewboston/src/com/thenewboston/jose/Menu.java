@@ -35,6 +35,7 @@ public class Menu extends ListActivity
 		String cheese = classes[position];
 		try
 		{
+			@SuppressWarnings("rawtypes")
 			Class ourClass = Class.forName("com.thenewboston.jose."+cheese);
 			Intent ourIntent = new Intent(Menu.this, ourClass);
 			startActivity(ourIntent);

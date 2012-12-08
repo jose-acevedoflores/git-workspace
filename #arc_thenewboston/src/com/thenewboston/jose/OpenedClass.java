@@ -17,7 +17,8 @@ public class OpenedClass extends Activity implements OnClickListener, OnCheckedC
 	private TextView question, test;
 	private Button returnData;
 	private RadioGroup selectionList;
-	private String gotBread, setData;
+	private String  setData;
+	
 	
 	protected void onCreate(Bundle savedInstanceState)
 	{

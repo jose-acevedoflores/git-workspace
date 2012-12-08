@@ -10,12 +10,12 @@ public class Tester {
 	 */
 	public static void main(String[] args) {
 		
-		//test();
+		test();
 		
 		 //Comment after added repo
 		circuit10_28();
 		//comment in mac
-//		circuit10_29();
+		circuit10_29();
 		
 		
 	}

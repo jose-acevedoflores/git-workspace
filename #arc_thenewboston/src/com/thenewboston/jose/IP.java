@@ -178,6 +178,7 @@ public class IP extends Activity implements OnClickListener{
 			String ipString = this.etIPField.getText().toString();
 			try {
 				this.tvFromServer.setText("Waiting for server: ");
+				@SuppressWarnings("unused")
 				UDPClient client = new UDPClient(ipString, message, tvFromServer);
 			} catch (Exception e) {
 				// Exploto
